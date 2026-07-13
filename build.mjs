@@ -1,17 +1,19 @@
 #!/usr/bin/env node
 // Static page generator for Bramble.
 //
-// Reads the single source of truth (the ARTICLES data + shared style/nav/footer
-// living in index.html) and emits real, crawlable static HTML so search engines
-// and non-JS crawlers get full article content, meta tags, and JSON-LD.
+// Source of truth for article content: content/<slug>.md (frontmatter + body).
+// Shared style/nav/footer chrome is pulled from index.html so pages match the app.
+// Emits real, crawlable static HTML so search engines and non-JS crawlers get
+// full article content, meta tags, and JSON-LD.
 //
-// Pure Node, zero dependencies. Run:  node build.mjs
+// Pure Node, zero dependencies. Run:  node build.mjs  (after editing content/*.md)
 // Output (committed to the repo, served as-is by Vercel):
-//   blog/index.html, blog/<slug>.html, sitemap.xml, robots.txt
+//   articles.js (data the SPA loads), blog/index.html, blog/<slug>.html,
+//   sitemap.xml, robots.txt
 //
 // Only articles that have a `body` are emitted; stubs are skipped until written.
 
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -25,11 +27,6 @@ const grab = (re, label) => {
   const m = src.match(re);
   if (!m) throw new Error('Could not find ' + label + ' in index.html');
   return m[0];
-};
-const grab1 = (re, label) => {
-  const m = src.match(re);
-  if (!m) throw new Error('Could not find ' + label + ' in index.html');
-  return m[1];
 };
 
 const ICON = grab(/<link rel="icon"[^>]*>/, 'favicon link');
@@ -47,7 +44,34 @@ const staticNav = (html) => html
 const HEADER = staticNav(grab(/<header>[\s\S]*?<\/header>/, '<header>'));
 const FOOTER = staticNav(grab(/<footer>[\s\S]*?<\/footer>/, '<footer>'));
 
-const ARTICLES = JSON.parse(grab1(/const ARTICLES\s*=\s*(\[[\s\S]*?\]);\s*renderBlog/, 'ARTICLES data'));
+// ---- article content: one Markdown file per article in content/ ----
+const parseArticle = (file) => {
+  const raw = readFileSync(join(ROOT, 'content', file), 'utf8');
+  const m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+  if (!m) throw new Error('Bad frontmatter in content/' + file);
+  const meta = {};
+  for (const line of m[1].split('\n')) {
+    const i = line.indexOf(':');
+    if (i > 0) meta[line.slice(0, i).trim()] = line.slice(i + 1).trim();
+  }
+  return {
+    slug: file.replace(/\.md$/, ''),
+    title: meta.title || '',
+    tag: meta.tag || '',
+    excerpt: meta.excerpt || '',
+    cta: meta.cta || '',
+    order: Number(meta.order) || 0,
+    body: m[2].replace(/\n+$/, '\n'),
+  };
+};
+const ARTICLES = readdirSync(join(ROOT, 'content'))
+  .filter((f) => f.endsWith('.md'))
+  .map(parseArticle)
+  .sort((a, b) => a.order - b.order);
+
+// ---- articles.js: the data the SPA (index.html) loads at runtime ----
+const spaData = ARTICLES.map(({ slug, title, tag, excerpt, body, cta }) => ({ slug, title, tag, excerpt, body, cta }));
+writeFileSync(join(ROOT, 'articles.js'), 'window.ARTICLES = ' + JSON.stringify(spaData) + ';\n');
 
 // ---- helpers ----
 const escHtml = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
