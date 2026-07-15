@@ -719,10 +719,11 @@ requestAnimationFrame(onScroll); // first reveal pass ASAP, before deferred scri
 window.addEventListener('resize', onScroll);
 
 function mdToHtml(md){
-  const lines=md.split('\n'); let html=''; let inList=false; let para=[]; let tbl=[];
+  const lines=md.split('\n'); let html=''; let inList=false; let para=[]; let tbl=[]; let quote=[];
   const inline=s=>s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');
   const flush=()=>{ if(para.length){ html+='<p>'+inline(para.join(' '))+'</p>'; para=[]; } };
   const closeList=()=>{ if(inList){ html+='</ol>'; inList=false; } };
+  const flushQuote=()=>{ if(quote.length){ html+='<blockquote>'+quote.map(inline).join('<br>')+'</blockquote>'; quote=[]; } };
   const cells=r=>r.replace(/^\s*\|/,'').replace(/\|\s*$/,'').split('|').map(c=>c.trim());
   const flushTable=()=>{
     if(!tbl.length) return;
@@ -737,18 +738,19 @@ function mdToHtml(md){
   };
   for(const raw of lines){
     const line=raw.replace(/\s+$/,'');
-    if(/^\s*\|.*\|\s*$/.test(line)){ flush(); closeList(); tbl.push(line); continue; }
+    if(/^\s*\|.*\|\s*$/.test(line)){ flush(); closeList(); flushQuote(); tbl.push(line); continue; }
     if(tbl.length) flushTable();
+    if(/^> ?/.test(line) && line.charAt(0)==='>'){ flush(); closeList(); quote.push(line.replace(/^> ?/,'')); continue; }
+    flushQuote();
     if(/^### /.test(line)){ flush(); closeList(); html+='<h3>'+inline(line.slice(4))+'</h3>'; }
     else if(/^## /.test(line)){ flush(); closeList(); html+='<h2>'+inline(line.slice(3))+'</h2>'; }
     else if(/^# /.test(line)){ flush(); }
-    else if(/^> /.test(line)){ flush(); closeList(); html+='<blockquote>'+inline(line.slice(2))+'</blockquote>'; }
     else if(/^---/.test(line)){ flush(); closeList(); }
     else if(/^\d+\. /.test(line)){ flush(); if(!inList){html+='<ol>';inList=true;} html+='<li>'+inline(line.replace(/^\d+\. /,''))+'</li>'; }
     else if(line===''){ flush(); closeList(); }
     else para.push(line);
   }
-  flush(); if(tbl.length) flushTable(); closeList();
+  flush(); if(tbl.length) flushTable(); closeList(); flushQuote();
   return html;
 }
 function renderBlog(){
@@ -764,7 +766,7 @@ function renderArticle(slug){
   const a=ARTICLES.find(x=>x.slug===slug);
   if(!a||!a.body) return null;
   document.getElementById('article-body').innerHTML='<div class="tag">'+a.tag+'</div><h1>'+a.title+'</h1>'+mdToHtml(a.body);
-  document.getElementById('article-cta').innerHTML='<strong style="font-family:var(--display);font-size:19px">'+a.cta+'</strong><div style="margin-top:16px"><a class="btn" href="#" onclick="goSection(\'pricing\');return false">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div>';
+  document.getElementById('article-cta').innerHTML=(a.cta?'<strong style="font-family:var(--display);font-size:19px">'+a.cta+'</strong>':'')+'<div style="margin-top:'+(a.cta?'16px':'0')+'"><a class="btn" href="#" onclick="goSection(\'pricing\');return false">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div>';
   setBreadcrumb(a);
   return a;
 }

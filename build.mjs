@@ -60,6 +60,8 @@ const parseArticle = (file) => {
     cta: meta.cta || '',
     order: Number(meta.order) || 0,
     date: meta.date || '',
+    updated: meta.updated || '',
+    byline: meta.byline || '',
     body: m[2].replace(/\n+$/, '\n'),
   };
 };
@@ -80,10 +82,11 @@ const ld = (o) => JSON.stringify(o).replace(/</g, '\\u003c');
 // Markdown renderer — ported verbatim from index.html's mdToHtml so static
 // output matches the in-app rendering exactly.
 function mdToHtml(md){
-  const lines=md.split('\n'); let html=''; let inList=false; let para=[]; let tbl=[];
+  const lines=md.split('\n'); let html=''; let inList=false; let para=[]; let tbl=[]; let quote=[];
   const inline=s=>s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');
   const flush=()=>{ if(para.length){ html+='<p>'+inline(para.join(' '))+'</p>'; para=[]; } };
   const closeList=()=>{ if(inList){ html+='</ol>'; inList=false; } };
+  const flushQuote=()=>{ if(quote.length){ html+='<blockquote>'+quote.map(inline).join('<br>')+'</blockquote>'; quote=[]; } };
   const cells=r=>r.replace(/^\s*\|/,'').replace(/\|\s*$/,'').split('|').map(c=>c.trim());
   const flushTable=()=>{
     if(!tbl.length) return;
@@ -98,18 +101,19 @@ function mdToHtml(md){
   };
   for(const raw of lines){
     const line=raw.replace(/\s+$/,'');
-    if(/^\s*\|.*\|\s*$/.test(line)){ flush(); closeList(); tbl.push(line); continue; }
+    if(/^\s*\|.*\|\s*$/.test(line)){ flush(); closeList(); flushQuote(); tbl.push(line); continue; }
     if(tbl.length) flushTable();
+    if(/^> ?/.test(line) && line.charAt(0)==='>'){ flush(); closeList(); quote.push(line.replace(/^> ?/,'')); continue; }
+    flushQuote();
     if(/^### /.test(line)){ flush(); closeList(); html+='<h3>'+inline(line.slice(4))+'</h3>'; }
     else if(/^## /.test(line)){ flush(); closeList(); html+='<h2>'+inline(line.slice(3))+'</h2>'; }
     else if(/^# /.test(line)){ flush(); }
-    else if(/^> /.test(line)){ flush(); closeList(); html+='<blockquote>'+inline(line.slice(2))+'</blockquote>'; }
     else if(/^---/.test(line)){ flush(); closeList(); }
     else if(/^\d+\. /.test(line)){ flush(); if(!inList){html+='<ol>';inList=true;} html+='<li>'+inline(line.replace(/^\d+\. /,''))+'</li>'; }
     else if(line===''){ flush(); closeList(); }
     else para.push(line);
   }
-  flush(); if(tbl.length) flushTable(); closeList();
+  flush(); if(tbl.length) flushTable(); closeList(); flushQuote();
   return html;
 }
 
@@ -172,7 +176,7 @@ const relatedTo = (a) => {
 
 for (const a of withBody) {
   const url = `${SITE}/blog/${a.slug}`;
-  const cta = a.cta || 'Your story deserves better than seventeen open tabs.';
+  const cta = a.cta;
   const related = relatedTo(a);
   const page = head({
     title: `${a.title} | Bramble`,
@@ -186,9 +190,9 @@ for (const a of withBody) {
         headline: a.title,
         description: a.excerpt,
         articleSection: a.tag,
-        ...(a.date ? { datePublished: a.date, dateModified: a.date } : {}),
+        ...(a.date ? { datePublished: a.date, dateModified: a.updated || a.date } : {}),
         mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-        author: { '@type': 'Organization', name: 'Bramble' },
+        author: a.byline ? { '@type': 'Person', name: a.byline.split(',')[0].replace(/^By /i, '') } : { '@type': 'Organization', name: 'Bramble' },
         publisher: { '@type': 'Organization', name: 'Bramble' },
       },
       crumbLd([
@@ -203,10 +207,10 @@ for (const a of withBody) {
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep" aria-hidden="true">/</span> <a href="/blog">Blog</a> <span class="sep" aria-hidden="true">/</span> <span aria-current="page">${escHtml(a.title)}</span></nav>
     <div class="tag">${escHtml(a.tag)}</div>
     <h1>${escHtml(a.title)}</h1>
-    ${a.date ? `<p class="pubdate"><time datetime="${a.date}">${fmtDate(a.date)}</time></p>` : ''}
+    ${a.date ? `<p class="pubdate">${a.byline ? 'By ' + escHtml(a.byline) + ' · ' : ''}<time datetime="${a.date}">${fmtDate(a.date)}</time>${a.updated && a.updated !== a.date ? ' · Updated ' + fmtDate(a.updated) : ''}</p>` : ''}
     ${mdToHtml(a.body)}
     <div class="related"><h2>Related reading</h2><ul>${related.map((r) => `<li><a href="/blog/${r.slug}">${escHtml(r.title)}</a></li>`).join('')}</ul></div>
-    <div class="cta-block"><strong style="font-family:var(--display);font-size:19px">${escHtml(cta)}</strong><div style="margin-top:16px"><a class="btn" href="/#pricing">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div></div>
+    <div class="cta-block">${cta ? `<strong style="font-family:var(--display);font-size:19px">${escHtml(cta)}</strong>` : ''}<div style="margin-top:${cta ? '16px' : '0'}"><a class="btn" href="/#pricing">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div></div>
   </div>
 </main>
 ` + FOOT;
@@ -240,12 +244,12 @@ const blogIndex = head({
 writeFileSync(join(ROOT, 'blog', 'index.html'), blogIndex);
 
 // ---- sitemap.xml + robots.txt ----
-const newest = withBody.map((a) => a.date).filter(Boolean).sort().pop() || '';
+const newest = withBody.map((a) => a.updated || a.date).filter(Boolean).sort().pop() || '';
 const entries = [
   { loc: `${SITE}/`, lastmod: newest },
   { loc: `${SITE}/blog`, lastmod: newest },
   { loc: `${SITE}/privacy`, lastmod: newest },
-  ...withBody.map((a) => ({ loc: `${SITE}/blog/${a.slug}`, lastmod: a.date })),
+  ...withBody.map((a) => ({ loc: `${SITE}/blog/${a.slug}`, lastmod: a.updated || a.date })),
 ];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

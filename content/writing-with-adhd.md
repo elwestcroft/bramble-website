@@ -1,50 +1,91 @@
 ---
-title: Writing With ADHD: Systems That Work With Your Brain, Not Against It
+title: Writing With ADHD: A Survival Guide
 tag: Craft
-excerpt: The writing systems that work best for many ADHD writers share four traits: they externalize memory instead of relying on it, they make progress visible, they…
-cta: You bring the ideas. Bramble does the remembering.
+excerpt: An ADHD writer's honest survival guide: catch fleeting ideas, make your story visual, leave notes for future you, fake momentum with sprints, and refill the tank. Free tools included.
+cta:
 order: 5
 date: 2026-07-04
+updated: 2026-07-15
+byline: Scott McKay, founder of Bramble
 ---
-# Writing With ADHD: Systems That Work With Your Brain, Not Against It
+# Writing With ADHD: A Survival Guide
 
-The writing systems that work best for many ADHD writers share four traits: they externalize memory instead of relying on it, they make progress visible, they shrink sessions to sprint size, and they cut startup friction to near zero. None of this is about discipline. It is about building an environment where the writing is the easiest available action, and this article is a practical setup guide, written with the assumption that you have read enough "just make a schedule" advice for one lifetime.
+A bit about me: I'm an aspiring writer with ADHD, and I put together this guide with the tips that have actually helped me along my path. Full transparency, I made an app called Bramble that I reference a few times. But I wanted to highlight plenty of free options and alternatives too, so this is genuinely what I promised and not a sales pitch in disguise.
 
-## Externalize Everything
+Fun note: I built Bramble to procrastinate from writing. Neuro-spicy brains, am I right?
 
-The core move: get story information out of your head and into one trusted place. Not five places. One. Plot threads, character details, the brilliant idea for chapter 30, the thing you must fix in chapter 4, all of it goes into a single home the moment it appears, because an idea captured is an idea you are allowed to stop holding.
+> **The short version, for my fellow scattered brains:**
+> 1. Jot down the gist. Get a loose map before you dive in.
+> 2. Make it visual. Mind maps and boards beat walls of text.
+> 3. Leave future-you a note. Mark where you stopped and what you were thinking.
+> 4. Fake momentum. A timer or a sprint tricks you into a few more pages.
+> 5. Read. Refill the tank. Inspiration counts as work.
 
-For fiction specifically, the "one place" needs to hold structured story information: characters, locations, storylines, world rules. This is precisely what a series bible is, and it is why organization-first tools resonate so strongly in ADHD writer communities. Bramble was designed around this principle: everything about the story lives beside the manuscript, so checking a fact or capturing an idea never requires leaving the page, and out of sight never gets the chance to become out of mind.
+Now the longer version.
 
-## Make Progress Visible
+## Tip 1: Jot down the gist (start with a loose story map)
 
-Long projects are hard when the payoff is two years away and invisible. The countermeasure is manufactured visibility: word counts that update as you type, goals with progress bars, streaks, session histories. Visible progress converts an abstract someday-book into a today-number that moves, and a number that moves is its own reward loop. Gamification gets dismissed as gimmickry by people who do not need it; for many writers, a quest that says "write 500 words" and then visibly completes is the difference between a writing day and a browsing day. Bramble builds this in with goals, personal bests, and activatable challenges tied to real progress.
+Start with the simplest, most boiled-down version of your story. Get it mapped out loosely. Some authors like to just start writing, and if that's you, go for it. But I really recommend getting a basic idea of where you're going. It helps prevent trailing down rabbit holes and filling pages with words that slow your story's momentum.
 
-## Shrink the Unit of Work
+A quick map gets you out of the weeds (brambles, if you will, nudge nudge).
 
-"Write the novel" is not an actionable task. "Write for 20 minutes" is. Timed sprints work because they replace an unbounded obligation with a bounded one, and bounded obligations are startable. Pair sprints with a pre-decided target ("this scene, not perfect, just existing") and treat the timer's end as a real finish line, celebration included. Our full sprint guide covers the mechanics; the short version is that a countdown timer is the cheapest focus tool ever invented.
+Jotting down scenes, dialogue, or twists also helps prevent you from losing them. My mind is constantly fleeting and losing great ideas left and right. I have a stack of notebooks full of scribbles to try to prevent that.
 
-## Cut Startup Friction to Zero
+Bramble has an elaborate note system for storing quick ideas, but even a few post-it notes on your desk can do the trick. A free notes app like Google Keep or Obsidian works too if you'd rather keep your scribbles in your pocket. Which leads into the next tip.
 
-The most dangerous moment is the beginning of a session, when reorientation ("where was I? what was happening?") can cost half an hour and sometimes the whole session. Reduce the reboot cost deliberately: end sessions mid-momentum with a note about what happens next, and use tools that re-orient you automatically. Bramble opens a book with a Previously On recap for exactly this reason: it shows where you last left off, and surfaces any note you wrote yourself the session before, so a ten-second glance replaces the thirty-minute reread.
+## Tip 2: Make it visual (mind maps and story boards)
 
-Environment friction counts too. A writing space that feels good to open gets opened. It sounds trivial and is not; this is why Bramble ships desk themes, full writing environments (a sci-fi desk, a gothic study) that make the app somewhere you want to be rather than another gray productivity surface.
+Visuals are easy to skim, easy to relay information quickly, and they break up the lines of text that make our eyes glaze over.
 
-## Forgive the Gaps
+When I learned about tools like Miro and Whimsical, it changed how I planned things out. I love a good mind map, and putting ideas into little boxes with arrows was a game changer.
 
-Every long project includes disappearances. The writers who finish are not the ones who never vanish; they are the ones whose systems make returning cheap. An externalized bible means the story survives your absence intact. A recap means re-entry takes seconds. A streak that broke is data, not a verdict. Build for the return, and the gaps stop being endings.
+I recommend taking your word-vomit notes and putting them up on a wall. Whether that's post-its on your fridge, a big old scrap of paper with some scribbled lines, or a free tool like Excalidraw or Whimsical, it does two things. It makes it easy to look at your story from a different perspective, and it lets you spot tangential side stories branching off the main arc, gaps in the plot, and more.
+
+My go-to format is to map out your main plot points, map out your main character's arc, and then expand from there. Line things up, use a traditional story archetype like the Hero's Journey, and make it visual. In Bramble, I added several story templates so you can pick whichever archetypal journey matches the story you're writing, or you can create your own. I made sure there were plenty of ways to view these arcs, to fit different writers or even what mood you're in. Sometimes I like seeing lines, sometimes I like seeing a chart.
+
+## Tip 3: Make your future self happy (leave yourself a note)
+
+Before you stop writing, leave a note for yourself about whatever you were working on: what page, what chapter, what sentence. And if you're up for it, add a few of your thoughts, so when you pick up the pen again you're reminded of the headspace you were in and the plans you had in place.
+
+In Bramble, whenever you close the app you're prompted with an optional note to yourself. It appears when you reopen the app and takes you to the exact place you left off. No app required, though. A sticky note on your monitor or a quick line at the top of your document does the exact same job.
+
+I needed this so badly. The number of times I had to reread a page just to jog my memory. Sometimes the reread sparks new ideas. Other times I'm halfway through a chapter before I remember my original idea tied into a future plot point that's now completely moot.
+
+## Tip 4: Fake momentum (timers and sprints)
+
+Have you ever stopped yourself from taking a pee break to try to finish a chapter? No? Just me. Cool, cool. Well, say you wanted to do something similar.
+
+Set up a timer. Use your phone, use an egg timer, look at a clock (so old school), try a free Pomodoro timer like Pomofocus, or if you use Bramble you can set a word counter, timer, or deadline to push yourself a little further each writing session.
+
+The one key: never guilt yourself about missing a goal. Creatives can be the hardest on ourselves, but the point is to light the fire within yourself, not under yourself.
+
+If you have a timer on your phone, set a 10 or 15 minute sprint and race against the clock. It helped me blast through a few extra pages a day, and I could still stop and take a bio break.
+
+## Tip 5: Read (refill the tank)
+
+Get inspired. It's okay not to be productive every single day, so if you're struggling to finish things, give yourself a break. Creativity is like breathing. You need to inhale and exhale. Inhaling is gathering inspiration, rest, and enjoyment from other works of art. Exhaling is your output, you adding your art to the world. You need to balance both.
+
+If you're reading this to break out of a slump, I see you. But be kind to yourself. Slumps happen. Take it slow, read a good book. If your to-be-read pile is empty, Libby is free with a library card, and Project Gutenberg has thousands of free classics. I often get out of spiralling periods of paralyzing inactivity by reading or watching something that inspires me. Sometimes it's so good that I aspire to make something just as good. More often, it's just good enough that I think "heck, I could write something better," and then, begrudgingly, I do.
+
+The moral of the story: you've got this. Keep plugging away, enjoy the process, and try out a few of these tips to see if they make things easier. I can't wait to read what you come up with, so please tag me on Instagram when you finish your story.
+
+I also have Bramble available as a free trial (14 days, no credit card), so if you want to try any of those snazzy features I mentioned, give it a whirl. It might just help you finish your story.
+
+Keep on ramblin'!
 
 ## FAQ
 
-**What is the best writing software for ADHD writers?**
-Look for four things: one home for all story information, visible progress and goals, sprint timers, and low-friction re-entry. Bramble was built around all four.
+**Why is writing so hard with ADHD?**
+For a lot of us it comes down to fleeting ideas and lost momentum. Great scenes vanish before we get them on the page, it's easy to trail down rabbit holes, and starting again after a break can feel impossible. Most of these tips are about catching ideas before they escape and making it easier to pick the pen back up.
 
-**How do I finish a novel when I keep starting new projects?**
-Lower the cost of returning to the main project (recaps, externalized notes) and give new ideas a capture home so they can be saved without being pursued. An idea safely written down loses much of its urgency.
+**How do you focus while writing with ADHD?**
+Fake a little momentum. Set a 10 or 15 minute timer and race the clock, and never guilt yourself for missing a goal. The idea is to light the fire within yourself, not under yourself.
 
-**Are writing sprints actually effective?**
-Timed, bounded sessions are one of the most consistently recommended techniques in writing communities, ADHD and otherwise. See our sprint guide for setups.
+**How do you stay organized writing a novel with ADHD?**
+Get the story out of your head and onto something you can see. Map your main plot points and your character's arc, then expand from there, using a structure like the Hero's Journey if it helps. Sticky notes on the fridge absolutely count.
 
-**Should I outline or discovery-write?**
-Whichever you finish with. Many writers do best with a light outline plus heavy externalized tracking, which gives structure without demanding it all up front.
+**What tools help writers with ADHD?**
+Anything that catches ideas and lowers the friction of starting. Free options include Excalidraw or Whimsical for mapping, a notes app or a plain notebook for stray thoughts, a Pomodoro timer like Pomofocus for sprints, and Libby or Project Gutenberg for inspiration. I built Bramble to pull these jobs into one place, but you don't need it to use any of this.
 
+**What if I'm stuck in a slump?**
+Rest counts. Creativity is inhale and exhale, you can't only output. Read something good, let it refill you, and be kind to yourself. Slumps happen.
