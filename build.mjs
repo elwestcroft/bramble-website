@@ -30,8 +30,6 @@ const grab = (re, label) => {
 };
 
 const ICON = grab(/<link rel="icon"[^>]*>/, 'favicon link');
-const PRECONNECT = grab(/<link rel="preconnect"[^>]*>/, 'preconnect link');
-const FONTS = grab(/<link href="https:\/\/fonts\.googleapis\.com[^>]*>/, 'fonts link');
 const STYLE = grab(/<style>[\s\S]*?<\/style>/, '<style> block');
 
 // Convert the SPA's onclick-based nav into plain links that work without JS.
@@ -136,9 +134,8 @@ const head = (parts) => `<!DOCTYPE html>
 <meta name="twitter:description" content="${escAttr(parts.desc)}">
 <meta name="twitter:image" content="${SITE}/img/og.jpg">
 ${ICON}
-${PRECONNECT}
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-${FONTS}
+<link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/instrumentsans-latin.woff2" crossorigin>
 ${STYLE}
 ${parts.jsonld.map((j) => `<script type="application/ld+json">${ld(j)}</script>`).join('\n')}
 </head>

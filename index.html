@@ -20,10 +20,13 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Bramble","operatingSystem":"macOS","applicationCategory":"Productivity","description":"Novel writing software that keeps every character, plot thread, and world detail organized in one place, beside the page. Built for fantasy, LitRPG, and series writers.","url":"https://trybramble.app/","image":"https://trybramble.app/img/og.jpg","offers":{"@type":"Offer","name":"Founder Edition","price":"39.99","priceCurrency":"CAD","description":"One-time purchase, lifetime access. 14-day free trial available."},"publisher":{"@type":"Organization","name":"Bramble","url":"https://trybramble.app/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Bramble?","acceptedAnswer":{"@type":"Answer","text":"Bramble is novel writing software that keeps characters, locations, storylines, and world rules organized in one place, beside the page. It is built for fantasy writers, LitRPG authors, series writers, and anyone whose story outgrew their tools."}},{"@type":"Question","name":"Can I import my existing manuscript?","acceptedAnswer":{"@type":"Answer","text":"Yes. Bramble imports Word (.docx) files directly, so your book arrives with its chapters intact and zero copy-paste penance. Coming from Scrivener or Dabble? Export to Word first, then import."}},{"@type":"Question","name":"What happens when the trial ends?","acceptedAnswer":{"@type":"Answer","text":"It ends. No card was taken, so nothing gets charged and nothing needs cancelling. Your work stays yours, and if you upgrade later it's all waiting where you left it."}},{"@type":"Question","name":"What does \"lifetime\" mean in the Founder Edition?","acceptedAnswer":{"@type":"Answer","text":"The lifetime of Bramble's core product: every current and future core feature, one writer, forever. Test it first with the 14-day free trial, and if you buy and change your mind, our payment provider Lemon Squeezy offers a 30-day refund policy."}},{"@type":"Question","name":"Is my writing private?","acceptedAnswer":{"@type":"Answer","text":"Your manuscript is your manuscript. Bramble is a writing tool, not an AI that trains on your book."}},{"@type":"Question","name":"Does Bramble work offline? Is it Mac-only?","acceptedAnswer":{"@type":"Answer","text":"Yes. Bramble is a macOS app and your manuscripts are plain files on your Mac, so you can write on a plane, in a cabin, anywhere. We recommend keeping your library folder in iCloud, Dropbox, or Google for redundancy."}}]}</script>
 <link rel="icon" type="image/png" href="/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/instrumentsans-latin.woff2" crossorigin>
 <style>
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:400 600;font-display:swap;src:url(/fonts/fraunces-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:400 600;font-display:swap;src:url(/fonts/fraunces-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:400 600;font-display:swap;src:url(/fonts/instrumentsans-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:400 600;font-display:swap;src:url(/fonts/instrumentsans-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 :root{
   --bg:#161817;          /* Dark Mode BG */
   --bg-soft:#1B1E1C;     /* alternate section */
@@ -328,7 +331,7 @@ footer .fmark{height:18px;opacity:.7;vertical-align:middle;margin-right:10px}
 <header>
   <nav class="nav">
     <a class="logo" href="#" onclick="go('home');return false" aria-label="Bramble home">
-      <img src="/img/logo.png" alt="bramble.">
+      <img src="/img/logo.webp" alt="bramble." width="400" height="89">
     </a>
     <button class="burger" onclick="const n=document.querySelector('.nav-links');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
       <svg viewBox="0 0 20 16" fill="none"><path d="M1 2h18M1 8h18M1 14h18"/></svg>
@@ -357,17 +360,17 @@ footer .fmark{height:18px;opacity:.7;vertical-align:middle;margin-right:10px}
 
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow reveal">Novel Writing Software</div>
-    <h1 class="reveal">Every character, every plot thread, every detail. <em>One place.</em></h1>
-    <p class="lede reveal">Bramble is the writing app for novelists whose stories outgrew their tools. Fantasy epics, LitRPG sagas, big casts: organized so you can stay in the story instead of struggling to manage it.</p>
-    <div class="cta-row reveal">
+    <div class="eyebrow">Novel Writing Software</div>
+    <h1>Every character, every plot thread, every detail. <em>One place.</em></h1>
+    <p class="lede">Bramble is the writing app for novelists whose stories outgrew their tools. Fantasy epics, LitRPG sagas, big casts: organized so you can stay in the story instead of struggling to manage it.</p>
+    <div class="cta-row">
       <a class="btn btn-big" href="#pricing" onclick="goSection('pricing');return false">Try Bramble Free</a>
     </div>
-    <p class="microtrust reveal">Free for 14 days. No credit card. Made for macOS.</p>
+    <p class="microtrust">Free for 14 days. No credit card. Made for macOS.</p>
     <div class="mock-stage">
       <div class="mock" id="heroMock">
         <div class="mock-bar"><span></span><span></span><span></span></div>
-        <img class="mock-shot" src="/img/hero.webp" srcset="/img/hero-1200.webp 1200w, /img/hero.webp 2016w" sizes="(max-width: 1150px) calc(100vw - 64px), 1056px" alt="The Bramble app: a manuscript chapter open beside the cast panel, with every character one click from the page" width="2016" height="1265" fetchpriority="high">
+        <img class="mock-shot" src="/img/hero.webp" srcset="/img/hero-800.webp 800w, /img/hero-1200.webp 1200w, /img/hero.webp 2016w" sizes="(max-width: 1150px) calc(100vw - 64px), 1056px" alt="The Bramble app: a manuscript chapter open beside the cast panel, with every character one click from the page" width="2016" height="1265" fetchpriority="high">
       </div>
     </div>
   </div>
@@ -388,7 +391,7 @@ footer .fmark{height:18px;opacity:.7;vertical-align:middle;margin-right:10px}
       </div>
       <div class="chaos-arrow" aria-hidden="true">→</div>
       <div class="chaos-shot">
-        <img src="/img/character-card.webp" alt="A character card in Bramble: Mara Voss, with her role, age tracked per book, fears, and what she carries" width="1109" height="1284" loading="lazy">
+        <img src="/img/character-card.webp" alt="A character card in Bramble: Mara Voss, with her role, age tracked per book, fears, and what she carries" width="880" height="1019" loading="lazy">
       </div>
     </div>
   </div>
@@ -562,7 +565,7 @@ footer .fmark{height:18px;opacity:.7;vertical-align:middle;margin-right:10px}
 
 <section class="final">
   <div class="wrap">
-    <img class="icon reveal" src="/favicon.png" alt="">
+    <img class="icon reveal" src="/favicon.png" alt="" width="160" height="160">
     <h2 class="reveal">Your story is waiting. Stop managing it and start writing it.</h2>
     <p class="lede reveal">Join the writers who stopped losing fights with their own notes.</p>
     <a class="btn btn-big reveal" href="#pricing" onclick="goSection('pricing');return false">Try Bramble Free</a>
@@ -618,7 +621,7 @@ footer .fmark{height:18px;opacity:.7;vertical-align:middle;margin-right:10px}
 
 <footer>
   <div class="wrap">
-    <div><img class="fmark" src="/favicon.png" alt="Bramble">© 2026 Bramble · Get lost in the weeds. On purpose.</div>
+    <div><img class="fmark" src="/favicon.png" alt="Bramble" width="160" height="160">© 2026 Bramble · Get lost in the weeds. On purpose.</div>
     <div>
       <a href="#" onclick="goSection('moves');return false">Features</a>
       <a href="#" onclick="goSection('pricing');return false">Pricing</a>

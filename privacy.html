@@ -6,9 +6,13 @@
 <title>Privacy Policy | Bramble</title>
 <meta name="description" content="Bramble's privacy policy. Your manuscripts stay on your Mac. We don't read your book or train anything on it.">
 <link rel="icon" type="image/png" href="/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/instrumentsans-latin.woff2" crossorigin>
 <style>
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:400 600;font-display:swap;src:url(/fonts/fraunces-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:400 600;font-display:swap;src:url(/fonts/fraunces-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:400 600;font-display:swap;src:url(/fonts/instrumentsans-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:400 600;font-display:swap;src:url(/fonts/instrumentsans-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 :root{
   --bg:#161817;          /* Dark Mode BG */
   --bg-soft:#1B1E1C;     /* alternate section */
@@ -302,7 +306,7 @@ footer .fmark{height:18px;opacity:.7;vertical-align:middle;margin-right:10px}
 <header>
   <nav class="nav">
     <a class="logo" href="#" href="/" aria-label="Bramble home">
-      <img src="/img/logo.png" alt="bramble.">
+      <img src="/img/logo.webp" alt="bramble." width="400" height="89">
     </a>
     <button class="burger" onclick="tgl()" aria-label="Open menu">
       <svg viewBox="0 0 20 16" fill="none"><path d="M1 2h18M1 8h18M1 14h18"/></svg>
@@ -352,7 +356,7 @@ footer .fmark{height:18px;opacity:.7;vertical-align:middle;margin-right:10px}
 </main>
 <footer>
   <div class="wrap">
-    <div><img class="fmark" src="/favicon.png" alt="Bramble">© 2026 Bramble · Get lost in the weeds. On purpose.</div>
+    <div><img class="fmark" src="/favicon.png" alt="Bramble" width="160" height="160">© 2026 Bramble · Get lost in the weeds. On purpose.</div>
     <div>
       <a href="/#moves">Features</a>
       <a href="/#pricing">Pricing</a>
