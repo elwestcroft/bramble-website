@@ -711,6 +711,7 @@ function onScroll(){
   });
 }
 window.addEventListener('scroll', onScroll, {passive:true});
+requestAnimationFrame(onScroll); // first reveal pass ASAP, before deferred scripts
 window.addEventListener('resize', onScroll);
 
 function mdToHtml(md){
