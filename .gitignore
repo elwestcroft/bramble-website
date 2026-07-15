@@ -6,3 +6,6 @@ node_modules/
 
 # Vercel
 .vercel/
+
+# Full-res/pre-retouch screenshot originals — keep local, don't publish
+img/originals/
