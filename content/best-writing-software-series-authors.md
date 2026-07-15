@@ -4,6 +4,7 @@ tag: Comparisons
 excerpt: Writing a series is a different sport from writing one book, but almost all writing software is built for the one-book crowd. That mismatch is why so many series…
 cta: Series writers don't need more willpower. They need infrastructure.
 order: 14
+date: 2026-07-12
 ---
 # Best Writing Software for Series Authors (2026)
 

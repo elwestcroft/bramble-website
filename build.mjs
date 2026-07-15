@@ -61,6 +61,7 @@ const parseArticle = (file) => {
     excerpt: meta.excerpt || '',
     cta: meta.cta || '',
     order: Number(meta.order) || 0,
+    date: meta.date || '',
     body: m[2].replace(/\n+$/, '\n'),
   };
 };
@@ -127,11 +128,16 @@ const head = (parts) => `<!DOCTYPE html>
 <meta property="og:description" content="${escAttr(parts.desc)}">
 <meta property="og:url" content="${parts.url}">
 <meta property="og:site_name" content="Bramble">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="${SITE}/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${escAttr(parts.title)}">
 <meta name="twitter:description" content="${escAttr(parts.desc)}">
+<meta name="twitter:image" content="${SITE}/img/og.jpg">
 ${ICON}
 ${PRECONNECT}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 ${FONTS}
 ${STYLE}
 ${parts.jsonld.map((j) => `<script type="application/ld+json">${ld(j)}</script>`).join('\n')}
@@ -154,9 +160,23 @@ const crumbLd = (items) => ({
 const withBody = ARTICLES.filter((a) => a.body);
 mkdirSync(join(ROOT, 'blog'), { recursive: true });
 
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const fmtDate = (iso) => {
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${MONTHS[m - 1]} ${d}, ${y}`;
+};
+// 3 related articles: same tag first (nearest by order), then nearest others
+const relatedTo = (a) => {
+  const dist = (x) => Math.abs(x.order - a.order);
+  const same = withBody.filter((x) => x.slug !== a.slug && x.tag === a.tag).sort((p, q) => dist(p) - dist(q));
+  const rest = withBody.filter((x) => x.slug !== a.slug && x.tag !== a.tag).sort((p, q) => dist(p) - dist(q));
+  return [...same, ...rest].slice(0, 3);
+};
+
 for (const a of withBody) {
   const url = `${SITE}/blog/${a.slug}`;
   const cta = a.cta || 'Your story deserves better than seventeen open tabs.';
+  const related = relatedTo(a);
   const page = head({
     title: `${a.title} | Bramble`,
     desc: a.excerpt,
@@ -169,6 +189,7 @@ for (const a of withBody) {
         headline: a.title,
         description: a.excerpt,
         articleSection: a.tag,
+        ...(a.date ? { datePublished: a.date, dateModified: a.date } : {}),
         mainEntityOfPage: { '@type': 'WebPage', '@id': url },
         author: { '@type': 'Organization', name: 'Bramble' },
         publisher: { '@type': 'Organization', name: 'Bramble' },
@@ -185,7 +206,9 @@ for (const a of withBody) {
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep" aria-hidden="true">/</span> <a href="/blog">Blog</a> <span class="sep" aria-hidden="true">/</span> <span aria-current="page">${escHtml(a.title)}</span></nav>
     <div class="tag">${escHtml(a.tag)}</div>
     <h1>${escHtml(a.title)}</h1>
+    ${a.date ? `<p class="pubdate"><time datetime="${a.date}">${fmtDate(a.date)}</time></p>` : ''}
     ${mdToHtml(a.body)}
+    <div class="related"><h2>Related reading</h2><ul>${related.map((r) => `<li><a href="/blog/${r.slug}">${escHtml(r.title)}</a></li>`).join('')}</ul></div>
     <div class="cta-block"><strong style="font-family:var(--display);font-size:19px">${escHtml(cta)}</strong><div style="margin-top:16px"><a class="btn" href="/#pricing">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div></div>
   </div>
 </main>
@@ -220,15 +243,21 @@ const blogIndex = head({
 writeFileSync(join(ROOT, 'blog', 'index.html'), blogIndex);
 
 // ---- sitemap.xml + robots.txt ----
-const urls = [`${SITE}/`, `${SITE}/blog`, `${SITE}/privacy`, ...withBody.map((a) => `${SITE}/blog/${a.slug}`)];
+const newest = withBody.map((a) => a.date).filter(Boolean).sort().pop() || '';
+const entries = [
+  { loc: `${SITE}/`, lastmod: newest },
+  { loc: `${SITE}/blog`, lastmod: newest },
+  { loc: `${SITE}/privacy`, lastmod: newest },
+  ...withBody.map((a) => ({ loc: `${SITE}/blog/${a.slug}`, lastmod: a.date })),
+];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u) => `  <url><loc>${u}</loc></url>`).join('\n')}
+${entries.map((e) => `  <url><loc>${e.loc}</loc>${e.lastmod ? `<lastmod>${e.lastmod}</lastmod>` : ''}</url>`).join('\n')}
 </urlset>
 `;
 writeFileSync(join(ROOT, 'sitemap.xml'), sitemap);
 writeFileSync(join(ROOT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
 
-console.log(`Generated ${withBody.length} article page(s), blog index, sitemap (${urls.length} urls), robots.txt`);
+console.log(`Generated ${withBody.length} article page(s), blog index, sitemap (${entries.length} urls), robots.txt`);
 console.log('Articles:', withBody.map((a) => a.slug).join(', '));
 console.log('Skipped (no body yet):', ARTICLES.filter((a) => !a.body).map((a) => a.slug).join(', ') || 'none');

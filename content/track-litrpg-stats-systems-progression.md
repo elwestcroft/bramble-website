@@ -4,6 +4,7 @@ tag: LitRPG
 excerpt: LitRPG authors need to track six things with database-grade reliability: character stats, skills and abilities, levels and experience, inventory, currencies, and…
 cta: Your readers have spreadsheets. Outgun them.
 order: 3
+date: 2026-07-03
 ---
 # How to Keep Track of LitRPG Stats, Systems, and Progression
 

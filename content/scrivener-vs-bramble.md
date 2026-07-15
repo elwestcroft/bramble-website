@@ -4,6 +4,7 @@ tag: Comparisons
 excerpt: You've heard Scrivener is the serious writer's tool. You've also heard it has a learning curve shaped like a cliff. Both things are true, and that's the whole story…
 cta: All of the organization. None of the 900-page manual.
 order: 9
+date: 2026-07-08
 ---
 # Scrivener vs Bramble: Which Fits How You Write?
 

@@ -4,6 +4,7 @@ tag: Comparisons
 excerpt: Dabble and Bramble agree on the big thing: writing software shouldn't make you take a night class before you can use it. Where they part ways is what they do once…
 cta: When the notes panel taps out, the bible steps in.
 order: 10
+date: 2026-07-09
 ---
 # Dabble vs Bramble: Friendly Cloud Writing or Deep Story Tracking?
 

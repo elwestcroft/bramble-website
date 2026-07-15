@@ -4,6 +4,7 @@ tag: Craft
 excerpt: The writing systems that work best for many ADHD writers share four traits: they externalize memory instead of relying on it, they make progress visible, they…
 cta: You bring the ideas. Bramble does the remembering.
 order: 5
+date: 2026-07-04
 ---
 # Writing With ADHD: Systems That Work With Your Brain, Not Against It
 

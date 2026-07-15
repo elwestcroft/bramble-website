@@ -4,6 +4,7 @@ tag: Worldbuilding
 excerpt: Worldbuilding software is any tool for creating, organizing, and retrieving the invented facts of a fictional world: places, cultures, magic or technology systems,…
 cta: Build the world where you write the book, and finish both.
 order: 16
+date: 2026-07-14
 ---
 # Worldbuilding Software: What It Is and What to Look For
 

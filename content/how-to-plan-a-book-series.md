@@ -4,6 +4,7 @@ tag: Series
 excerpt: Planning a book series comes down to three jobs: decide the series-level promises before you finish Book 1, structure each book as both a complete story and a step…
 cta: Book 5 is already coming for you.
 order: 7
+date: 2026-07-06
 ---
 # How to Plan a Book Series: Bibles, Arcs, and Continuity
 

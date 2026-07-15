@@ -4,6 +4,7 @@ tag: Series
 excerpt: A series bible is a master reference document that records everything established as true in a story world: characters and their details, locations, world rules,…
 cta: Somewhere out there, a reader is fact-checking you.
 order: 2
+date: 2026-07-02
 ---
 # What Is a Series Bible? (And Why You Need One by Book Two)
 

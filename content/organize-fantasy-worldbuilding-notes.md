@@ -4,6 +4,7 @@ tag: Worldbuilding
 excerpt: The most effective way to organize worldbuilding notes is story-first: track only the facts your narrative touches, keep them in one place beside the manuscript,…
 cta: The world can be infinite. Your afternoon isn't.
 order: 4
+date: 2026-07-04
 ---
 # How to Organize Fantasy Worldbuilding Notes (Without Losing Your Mind)
 

@@ -4,6 +4,7 @@ tag: Series
 excerpt: Series bible software is any tool that stores and retrieves the established facts of a book series (characters, locations, world rules, timeline, storylines) so an…
 cta: Run the fifteen-second test on us.
 order: 17
+date: 2026-07-15
 ---
 # Series Bible Software: A Buyer's Guide for Authors
 

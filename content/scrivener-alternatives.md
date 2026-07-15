@@ -4,6 +4,7 @@ tag: Comparisons
 excerpt: Nobody googles "Scrivener alternatives" for fun. Something drove you here, and *which* something matters, because the right replacement depends entirely on what…
 cta: You bought Scrivener for the organization.
 order: 15
+date: 2026-07-13
 ---
 # Scrivener Alternatives (2026): Choose by What Drove You Away
 

@@ -4,6 +4,7 @@ tag: Comparisons
 excerpt: There is no single best novel writing software, and anyone who tells you otherwise is selling something (fair warning: we sell something too). The honest answer is…
 cta: The writers with the fewest tabs open are winning.
 order: 8
+date: 2026-07-07
 ---
 # Best Novel Writing Software 2026: An Honest Comparison
 

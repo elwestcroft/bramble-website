@@ -4,6 +4,7 @@ tag: Craft
 excerpt: Keeping track of characters in a long series means recording each character's fixed traits, relationships, and story-relevant changes in one searchable place, and…
 cta: Your cast remembers everything. Do you?
 order: 1
+date: 2026-07-01
 ---
 # How to Keep Track of Characters in a Long Series
 

@@ -4,6 +4,7 @@ tag: Productivity
 excerpt: A writing sprint is a short, timed writing session (commonly 15 to 30 minutes) with one rule: words go forward and editing waits. Sprints work because they invert…
 cta: Motivation is flaky. Timers show up.
 order: 6
+date: 2026-07-05
 ---
 # Writing Sprints: How Timed Sessions Beat Waiting for Motivation
 

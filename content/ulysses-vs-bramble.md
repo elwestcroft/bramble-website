@@ -4,6 +4,7 @@ tag: Comparisons
 excerpt: Ulysses and Bramble are both macOS writing apps, and they are barely competitors, which is exactly why the comparison is useful. Ulysses is a beautiful markdown…
 cta: The blank page was never the problem. The 400 facts orbiting it were.
 order: 12
+date: 2026-07-11
 ---
 # Ulysses vs Bramble: Minimalist Prose Tool or Novelist's Story Engine?
 

@@ -4,6 +4,7 @@ tag: Comparisons
 excerpt: Fantasy writers carry a heavier bag than most novelists. You've got a world to keep straight, a cast that keeps multiplying, and a series that stretches over years,…
 cta: Your world has seven kingdoms and one very tired custodian: you.
 order: 13
+date: 2026-07-12
 ---
 # Best Apps for Fantasy Writers (2026)
 

@@ -4,6 +4,7 @@ tag: Comparisons
 excerpt: NovelPad and Bramble both believe a novelist wants their story bible sitting right next to the manuscript. They just disagree about how much bible you…
 cta: Jotting is lovely until Book 3 asks a question.
 order: 11
+date: 2026-07-10
 ---
 # NovelPad vs Bramble: Minimalist Bible or Full Story Engine?
 
