@@ -6,7 +6,7 @@ cta:
 order: 5
 date: 2026-07-04
 updated: 2026-07-15
-byline: Scott McKay, founder of Bramble
+byline: SJ McKay, founder of Bramble
 ---
 # Writing With ADHD: A Survival Guide
 

@@ -220,7 +220,7 @@ for (const a of withBody) {
 // ---- blog index ----
 const card = (a) => a.body
   ? `<a class="post-card" href="/blog/${a.slug}"><div class="tag">${escHtml(a.tag)}</div><h3>${escHtml(a.title)}</h3><p>${escHtml(a.excerpt)}</p><div class="more">Read the article →</div></a>`
-  : `<div class="post-card stub"><div class="tag">${escHtml(a.tag)}</div><h3>${escHtml(a.title)}</h3><p>${escHtml(a.excerpt)}</p><div class="more">Full draft in the content library</div></div>`;
+  : `<div class="post-card stub"><div class="tag">${escHtml(a.tag)}</div><h3>${escHtml(a.title)}</h3><p>${escHtml(a.excerpt)}</p><div class="more">Coming soon</div></div>`;
 
 const blogIndex = head({
   title: 'The Bramble Blog | Field Notes for Writers',

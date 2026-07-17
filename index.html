@@ -56,7 +56,7 @@ button{font-family:var(--body)}
 .vine-right{right:0;transform:scaleX(-1)}
 .vine path.cane{fill:none;stroke:var(--green);stroke-width:1.6;stroke-linecap:round;opacity:.30;
   stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .15s linear}
-.vine .sprout{opacity:0;transform:scale(.4);transform-origin:center;transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.3,1.2)}
+.vine .sprout{opacity:0;transform:scale(.4);transform-origin:center;transition:opacity .8s ease,transform .8s cubic-bezier(.22,.8,.36,1)}
 .vine .sprout.grown{opacity:.4;transform:scale(1)}
 .vine .leaf{fill:var(--green)}
 .vine .berry-dot{fill:var(--red)}
@@ -113,7 +113,8 @@ a.btn-ghost{color:var(--text)}
 main{position:relative;z-index:1}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
 section{padding:88px 0}
-.eyebrow{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:14px}
+.eyebrow{font-family:var(--display);font-style:italic;font-size:16px;font-weight:500;letter-spacing:0;text-transform:lowercase;color:var(--green);margin-bottom:12px}
+.eyebrow::before{content:"\2767\00a0";font-style:normal;opacity:.75}
 h2{font-size:clamp(28px,4vw,42px);max-width:22ch;margin-bottom:16px}
 .lede{font-size:19px;color:var(--text-soft);max-width:60ch}
 .center{text-align:center}
@@ -182,16 +183,9 @@ h2{font-size:clamp(28px,4vw,42px);max-width:22ch;margin-bottom:16px}
 .aud a:hover{border-color:var(--green);transform:translateY(-2px)}
 .aud b{font-family:var(--display);font-size:19px;font-weight:500;display:block;margin-bottom:6px}
 .aud p{font-size:14px;color:var(--text-soft)}
+.aud .sig{margin-top:10px;font-family:var(--display);font-style:italic;font-size:13.5px;color:var(--green)}
 @media(max-width:1000px){.aud{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.aud{grid-template-columns:1fr}}
-.desks{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
-.desk{border-radius:12px;padding:26px;min-height:190px;display:flex;flex-direction:column;justify-content:flex-end;border:1px solid var(--hairline)}
-.desk b{font-family:var(--display);font-size:20px;font-weight:500}
-.desk p{font-size:13.5px;opacity:.85;margin-top:4px}
-.desk-scifi{background:linear-gradient(160deg,#0B1620,#12232E);color:#9FD8CF}
-.desk-gothic{background:linear-gradient(160deg,#1C1420,#2B1B2E);color:#D8C7DE}
-.desk-romantasy{background:linear-gradient(160deg,#F4E3E4,#EAD3DD);color:#5C2E44;border-color:transparent}
-@media(max-width:900px){.desks{grid-template-columns:1fr}}
 .quotes{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:22px;margin-top:44px}
 .quote{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px;text-align:left;display:flex;flex-direction:column}
 .quote p{font-family:var(--display);font-size:17px;line-height:1.5;color:var(--text)}
@@ -264,7 +258,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
 .crumbs [aria-current]{color:var(--text-soft)}
 .blog-hero .crumbs{margin-bottom:18px}
 .article h3{font-family:var(--display);font-weight:500;font-size:20px;margin:28px 0 8px;color:var(--text)}
-.article blockquote{margin:18px 0;padding:14px 20px;border-left:3px solid var(--green);background:var(--card);border-radius:0 8px 8px 0;color:var(--text-soft);font-style:italic}
+.article blockquote{margin:18px 0;padding:14px 20px;border:1px solid var(--hairline);background:var(--card);border-radius:8px;color:var(--text-soft);font-style:italic}
 .tblwrap{overflow-x:auto;margin:22px 0;border:1px solid var(--hairline);border-radius:10px}
 .article table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
 .article table th,.article table td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--hairline);vertical-align:top}
@@ -342,7 +336,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
 
 <header>
   <nav class="nav">
-    <a class="logo" href="#" onclick="go('home');return false" aria-label="Bramble home">
+    <a class="logo" href="/" onclick="go('home');return false" aria-label="Bramble home">
       <img src="/img/logo.webp" alt="bramble." width="400" height="89">
     </a>
     <button class="burger" onclick="const n=document.querySelector('.nav-links');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
@@ -353,16 +347,16 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
       <div class="dropdown">
         <a href="#who" onclick="goSection('who');return false">Who It's For</a>
         <div class="dropdown-menu">
-          <a href="#who" onclick="goSection('who');return false">Fantasy Writers</a>
-          <a href="#who" onclick="goSection('who');return false">LitRPG Authors</a>
-          <a href="#who" onclick="goSection('who');return false">Series Writers</a>
-          <a href="#who" onclick="goSection('who');return false">Writers With ADHD</a>
+          <a href="/blog/organize-fantasy-worldbuilding-notes" onclick="openArticle('organize-fantasy-worldbuilding-notes');return false">Fantasy Writers</a>
+          <a href="/blog/track-litrpg-stats-systems-progression" onclick="openArticle('track-litrpg-stats-systems-progression');return false">LitRPG Authors</a>
+          <a href="/blog/what-is-a-series-bible" onclick="openArticle('what-is-a-series-bible');return false">Series Writers</a>
+          <a href="/blog/writing-with-adhd" onclick="openArticle('writing-with-adhd');return false">Writers With ADHD</a>
         </div>
       </div>
       <a href="#pricing" onclick="goSection('pricing');return false">Pricing</a>
       <a href="/blog" onclick="go('blog');return false">Blog</a>
-      <a href="#" onclick="goSection('faq');return false">Support</a>
-      <a class="btn" href="#" onclick="goSection('pricing');return false">Try Bramble</a>
+      <a href="#faq" onclick="goSection('faq');return false">Support</a>
+      <a class="btn" href="#pricing" onclick="goSection('pricing');return false">Try Bramble</a>
     </div>
   </nav>
 </header>
@@ -478,7 +472,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
       <a class="reveal" href="/blog/organize-fantasy-worldbuilding-notes" onclick="openArticle('organize-fantasy-worldbuilding-notes');return false"><b>Fantasy writers</b><p>Seven Kingdoms and a tired custodian: you. Get your realm under control.</p></a>
       <a class="reveal" href="/blog/track-litrpg-stats-systems-progression" onclick="openArticle('track-litrpg-stats-systems-progression');return false"><b>LitRPG authors</b><p>Stats, skills, systems... Stay ahead of it all.</p></a>
       <a class="reveal" href="/blog/what-is-a-series-bible" onclick="openArticle('what-is-a-series-bible');return false"><b>Series writers</b><p>Book 5 in the works? Try the Series Bible instead of a re-read.</p></a>
-      <a class="reveal" href="/blog/writing-with-adhd" onclick="openArticle('writing-with-adhd');return false"><b>Writers with ADHD</b><p>I'm one, which is why I built this tool. Bramble keeps track, so I can focus on the creativity! Dopamine activate!</p></a>
+      <a class="reveal" href="/blog/writing-with-adhd" onclick="openArticle('writing-with-adhd');return false"><b>Writers with ADHD</b><p>I'm one, which is why I built this tool. Bramble keeps track, so I can focus on the creativity! Dopamine activate!</p><p class="sig">— SJ McKay, founder</p></a>
     </div>
   </div>
 </section>
@@ -498,7 +492,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
     </div>
     <div class="deskctl" aria-label="Desk theme controls">
       <button type="button" class="deskarrow" data-dir="-1" aria-label="Previous theme">&#8249;</button>
-      <div class="deskdots"></div>
+      <div class="deskdots" role="tablist" aria-label="Desk themes"></div>
       <button type="button" class="deskarrow" data-dir="1" aria-label="Next theme">&#8250;</button>
     </div>
     <p class="microtrust reveal" style="text-align:center;margin-top:40px">Six themes to choose from: Classic, Dark, Romantasy, Sci-fi, Great American Novel, and Gothic. Switch anytime with a keystroke. Your words never change, only the room around them.</p>
@@ -536,7 +530,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
 <section id="pricing" class="alt">
   <div class="wrap center">
     <div class="eyebrow reveal">Pricing</div>
-    <h2 class="reveal">Try it free for 14 days, or snag lifetime access before it's gone!</h2>
+    <h2 class="reveal">Try it free for 14 days, or make it yours for life.</h2>
     <p class="lede reveal">Bramble doesn't use proprietary filetypes, so any work you create during your trial can easily be taken with you. Although we do hope you stay!</p>
     <div class="plans">
       <div class="plan reveal">
@@ -547,15 +541,15 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
         <a class="btn" href="#">Download the free trial</a>
       </div>
       <div class="plan founder reveal">
-        <div class="badge">Founder Edition · Limited Offer</div>
+        <div class="badge">Founder Edition</div>
         <h3>Founder Edition</h3>
         <div class="price">$39.99<span style="font-size:16px;color:var(--text-soft)"> CAD</span></div>
         <div class="per">One-time, lifetime access. macOS. Founder pricing is for the launch window only, and we mean it.</div>
-        <ul><li>Everything in the trial, unlocked forever</li><li>Limited lifetime subscriptions available</li><li>First access to new features; you fund the roadmap</li></ul>
+        <ul><li>Everything in the trial, unlocked forever</li><li>A lifetime license, not a subscription</li><li>First access to new features; you fund the roadmap</li></ul>
         <a class="btn" href="#">Claim the Founder Edition</a>
       </div>
     </div>
-    <p class="microtrust reveal">Try it out for free! Founder pricing available for a limited time.</p>
+    <p class="microtrust reveal">Most writers start with the trial, then make it permanent.</p>
     <p class="microtrust reveal">Secure checkout via Lemon Squeezy · PayPal accepted · Tax calculated at checkout</p>
   </div>
 </section>
@@ -610,7 +604,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
     <p>You can request a copy of the limited data we hold (your email, order, and license status), ask us to delete it, or deactivate a license from your device. Because your writing lives on your Mac, deleting your account with us does not touch your manuscripts; those are yours to keep or remove.</p>
     <h2>Contact</h2>
     <p>Questions about privacy? Email <strong>info@trybramble.app</strong>. The full, current policy is published at https://trybramble.app/privacy.</p>
-    <div class="cta-block"><strong style="font-family:var(--display);font-size:19px">Your words never leave your Mac unless you send them.</strong><div style="margin-top:16px"><a class="btn" href="#" onclick="goSection('pricing');return false">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div></div>
+    <div class="cta-block"><strong style="font-family:var(--display);font-size:19px">Your words never leave your Mac unless you send them.</strong><div style="margin-top:16px"><a class="btn" href="#pricing" onclick="goSection('pricing');return false">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div></div>
   </div>
 </div>
 <div id="view-blog" class="hidden">
@@ -636,10 +630,10 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
   <div class="wrap">
     <div><img class="fmark" src="/favicon.png" alt="Bramble" width="160" height="160">© 2026 Bramble · Get lost in the weeds. On purpose.</div>
     <div>
-      <a href="#" onclick="goSection('moves');return false">Features</a>
-      <a href="#" onclick="goSection('pricing');return false">Pricing</a>
+      <a href="#moves" onclick="goSection('moves');return false">Features</a>
+      <a href="#pricing" onclick="goSection('pricing');return false">Pricing</a>
       <a href="/blog" onclick="go('blog');return false">Blog</a>
-      <a href="#" onclick="goSection('faq');return false">Support</a>
+      <a href="#faq" onclick="goSection('faq');return false">Support</a>
       <a href="/privacy">Privacy</a>
       <a class="ig" href="https://instagram.com/trybramble" target="_blank" rel="noopener" aria-label="Bramble on Instagram (@trybramble)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.3" fill="currentColor"/></svg></a>
     </div>
@@ -741,7 +735,7 @@ requestAnimationFrame(onScroll); // first reveal pass ASAP, before deferred scri
     b.setAttribute('role','tab');
     b.setAttribute('aria-label',c.dataset.theme);
     b.setAttribute('aria-selected', i===0?'true':'false');
-    b.addEventListener('click',()=>go(i));
+    b.addEventListener('click',()=>goTo(i));
     dotwrap.appendChild(b); return b;
   });
   function paint(){
@@ -751,7 +745,7 @@ requestAnimationFrame(onScroll); // first reveal pass ASAP, before deferred scri
     });
     dots.forEach((d,i)=>d.setAttribute('aria-selected', i===active?'true':'false'));
   }
-  function go(i){
+  function goTo(i){
     if(mobile()){
       active=Math.max(0,Math.min(N-1,i));
       cards[active].scrollIntoView({inline:'center',block:'nearest',behavior:reduceMotion?'auto':'smooth'});
@@ -760,11 +754,11 @@ requestAnimationFrame(onScroll); // first reveal pass ASAP, before deferred scri
       active=(i%N+N)%N; paint();
     }
   }
-  document.querySelectorAll('.deskarrow').forEach(a=>a.addEventListener('click',()=>go(active+ +a.dataset.dir)));
-  cards.forEach((c,i)=>c.addEventListener('click',()=>{ if(!mobile() && i!==active) go(i); }));
+  document.querySelectorAll('.deskarrow').forEach(a=>a.addEventListener('click',()=>goTo(active+ +a.dataset.dir)));
+  cards.forEach((c,i)=>c.addEventListener('click',()=>{ if(!mobile() && i!==active) goTo(i); }));
   stack.addEventListener('keydown',e=>{
-    if(e.key==='ArrowRight'){ go(active+1); e.preventDefault(); }
-    else if(e.key==='ArrowLeft'){ go(active-1); e.preventDefault(); }
+    if(e.key==='ArrowRight'){ goTo(active+1); e.preventDefault(); }
+    else if(e.key==='ArrowLeft'){ goTo(active-1); e.preventDefault(); }
   });
   // pointer-drag = swipe, desktop
   let sx=null;
@@ -818,7 +812,7 @@ function renderBlog(){
   const grid=document.getElementById('blog-grid');
   grid.innerHTML=ARTICLES.map(a=>{
     const cls='post-card'+(a.body?'':' stub');
-    const more=a.body?'Read the article →':'Full draft in the content library';
+    const more=a.body?'Read the article →':'Coming soon';
     const click=a.body?`onclick="openArticle('${a.slug}');return false"`:'onclick="return false"';
     return `<a class="${cls}" href="#" ${click}><div class="tag">${a.tag}</div><h3>${a.title}</h3><p>${a.excerpt}</p><div class="more">${more}</div></a>`;
   }).join('');
@@ -827,7 +821,7 @@ function renderArticle(slug){
   const a=ARTICLES.find(x=>x.slug===slug);
   if(!a||!a.body) return null;
   document.getElementById('article-body').innerHTML='<div class="tag">'+a.tag+'</div><h1>'+a.title+'</h1>'+mdToHtml(a.body);
-  document.getElementById('article-cta').innerHTML=(a.cta?'<strong style="font-family:var(--display);font-size:19px">'+a.cta+'</strong>':'')+'<div style="margin-top:'+(a.cta?'16px':'0')+'"><a class="btn" href="#" onclick="goSection(\'pricing\');return false">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div>';
+  document.getElementById('article-cta').innerHTML=(a.cta?'<strong style="font-family:var(--display);font-size:19px">'+a.cta+'</strong>':'')+'<div style="margin-top:'+(a.cta?'16px':'0')+'"><a class="btn" href="#pricing" onclick="goSection(\'pricing\');return false">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div>';
   setBreadcrumb(a);
   return a;
 }
