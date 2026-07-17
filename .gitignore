@@ -12,3 +12,8 @@ img/originals/
 
 # AI-agent tooling (impeccable skill + hooks) — local dev only, never deploy
 .claude/
+.impeccable/
+
+# Internal design/brand context docs — public repo is served at root, keep these local
+PRODUCT.md
+DESIGN.md
