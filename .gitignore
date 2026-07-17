@@ -9,3 +9,6 @@ node_modules/
 
 # Full-res/pre-retouch screenshot originals — keep local, don't publish
 img/originals/
+
+# AI-agent tooling (impeccable skill + hooks) — local dev only, never deploy
+.claude/
