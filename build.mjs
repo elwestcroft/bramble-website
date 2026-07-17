@@ -41,6 +41,8 @@ const staticNav = (html) => html
 
 const HEADER = staticNav(grab(/<header>[\s\S]*?<\/header>/, '<header>'));
 const FOOTER = staticNav(grab(/<footer>[\s\S]*?<\/footer>/, '<footer>'));
+const ANALYTICS = grab(/<!-- consent\+analytics:start -->[\s\S]*?<!-- consent\+analytics:end -->/, 'analytics block');
+const BANNER = grab(/<!-- consent-banner:start -->[\s\S]*?<!-- consent-banner:end -->/, 'consent banner');
 
 // ---- article content: one Markdown file per article in content/ ----
 const parseArticle = (file) => {
@@ -122,6 +124,7 @@ const head = (parts) => `<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+${ANALYTICS}
 <title>${escHtml(parts.title)}</title>
 <meta name="description" content="${escAttr(parts.desc)}">
 <link rel="canonical" href="${parts.url}">
@@ -147,6 +150,7 @@ ${parts.jsonld.map((j) => `<script type="application/ld+json">${ld(j)}</script>`
 ${HEADER}`;
 
 const FOOT = `${FOOTER}
+${BANNER}
 </body>
 </html>
 `;

@@ -3,6 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- consent+analytics:start -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // Consent Mode v2 (advanced): granted globally, DENIED by default across the EEA/UK until the visitor opts in.
+  gtag('consent','default',{'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});
+  gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500,'region':['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB']});
+  gtag('set','ads_data_redaction',true);
+  gtag('set','url_passthrough',true);
+  // Re-apply a returning visitor's saved choice before tags evaluate.
+  try{var _c=localStorage.getItem('bramble-consent');if(_c==='granted'||_c==='denied'){gtag('consent','update',{'ad_storage':_c,'ad_user_data':_c,'ad_personalization':_c,'analytics_storage':_c});}}catch(e){}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XL1M02XG4B"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'G-XL1M02XG4B');
+</script>
+<!-- consent+analytics:end -->
 <title>Privacy Policy | Bramble</title>
 <meta name="description" content="Bramble's privacy policy. Your manuscripts stay on your Mac. We don't read your book or train anything on it.">
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -42,7 +60,7 @@ button{font-family:var(--body)}
 .vine-right{right:0;transform:scaleX(-1)}
 .vine path.cane{fill:none;stroke:var(--green);stroke-width:1.6;stroke-linecap:round;opacity:.30;
   stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .15s linear}
-.vine .sprout{opacity:0;transform:scale(.4);transform-origin:center;transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.3,1.2)}
+.vine .sprout{opacity:0;transform:scale(.4);transform-origin:center;transition:opacity .8s ease,transform .8s cubic-bezier(.22,.8,.36,1)}
 .vine .sprout.grown{opacity:.4;transform:scale(1)}
 .vine .leaf{fill:var(--green)}
 .vine .berry-dot{fill:var(--red)}
@@ -302,6 +320,11 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
   .deskcard:not(.front){display:none}
   .deskcard.front{order:-1}
 }
+.consent{position:fixed;left:16px;right:16px;bottom:16px;z-index:60;max-width:540px;margin:0 auto;background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:18px 20px;box-shadow:0 18px 44px rgba(8,18,13,.5);display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.consent[hidden]{display:none}
+.consent-copy{flex:1;min-width:220px;font-size:14px;line-height:1.5;color:var(--text-soft);margin:0}
+.consent-actions{display:flex;gap:10px;flex-shrink:0}
+.consent .btn{font-size:14px;padding:9px 18px}
 </style>
 </head>
 <body>
@@ -347,6 +370,10 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
       <li><strong>Update checks.</strong> Bramble checks for new versions so you get fixes and features.</li>
       <li><strong>Optional support contact.</strong> If you email info@trybramble.app, we keep that correspondence to help you.</li>
     </ol>
+    <h2>This website (analytics &amp; cookies)</h2>
+    <p>This marketing website uses Google Analytics (measurement ID G-XL1M02XG4B) to understand how visitors find and move through the pages, so we can improve them. This is separate from the Bramble app; the app itself still runs no analytics or advertising trackers, as described above.</p>
+    <p>We use Google Consent Mode. If you visit from the European Economic Area or the United Kingdom, analytics and advertising storage are <strong>denied by default</strong> and no analytics cookies are set unless you choose <strong>Accept</strong> on the cookie banner. You can change your mind any time with the <strong>Cookie choices</strong> link in the footer. Elsewhere, analytics runs by default and you can decline with the same control. Your choice is remembered on your device.</p>
+    <p>Google Analytics may set cookies and process usage data (such as pages viewed, approximate location, device and browser) as our processor. We have enabled IP redaction of ad signals; we do not use this data for advertising, and we don't sell it. See <strong>Google's Privacy Policy</strong> for how Google handles it.</p>
     <h2>What we don't do</h2>
     <p>We don't sell your data. We don't use your writing to train AI. We don't run advertising trackers inside the app. There is no generative AI in your manuscript, by design.</p>
     <h2>Your choices</h2>
@@ -364,11 +391,40 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
       <a href="/#pricing">Pricing</a>
       <a href="/blog">Blog</a>
       <a href="/#faq">Support</a>
+      <a href="/privacy" onclick="if(window.brambleOpenConsent){brambleOpenConsent();return false}">Cookie choices</a>
       <a href="/privacy">Privacy</a>
       <a class="ig" href="https://instagram.com/trybramble" target="_blank" rel="noopener" aria-label="Bramble on Instagram (@trybramble)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.3" fill="currentColor"/></svg></a>
     </div>
   </div>
 </footer>
 <script>function tgl(){document.querySelector('.nav-links').classList.toggle('open');}</script>
+<!-- consent-banner:start -->
+<div id="consent" class="consent" role="dialog" aria-label="Privacy choices" hidden>
+  <p class="consent-copy">We'd like to use Google Analytics to see how the site is doing. It only sets cookies if you say yes. <a href="/privacy">More in our privacy policy</a>.</p>
+  <div class="consent-actions">
+    <button type="button" class="btn" data-consent="granted">Accept</button>
+    <button type="button" class="btn btn-ghost" data-consent="denied">Decline</button>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='bramble-consent', el=document.getElementById('consent'); if(!el) return;
+  function likelyEEA(){
+    try{ var tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';
+      return /^Europe\//.test(tz) || ['Atlantic/Reykjavik','Atlantic/Azores','Atlantic/Madeira','Atlantic/Canary'].indexOf(tz)>=0;
+    }catch(e){ return true; }
+  }
+  function choose(v){
+    try{localStorage.setItem(KEY,v);}catch(e){}
+    if(typeof gtag==='function'){ gtag('consent','update',{'ad_storage':v,'ad_user_data':v,'ad_personalization':v,'analytics_storage':v}); }
+    el.hidden=true;
+  }
+  el.querySelectorAll('[data-consent]').forEach(function(b){ b.addEventListener('click',function(){ choose(b.getAttribute('data-consent')); }); });
+  window.brambleOpenConsent=function(){ el.hidden=false; };
+  var stored=null; try{stored=localStorage.getItem(KEY);}catch(e){}
+  if(!stored && likelyEEA()){ el.hidden=false; }
+})();
+</script>
+<!-- consent-banner:end -->
 </body>
 </html>
