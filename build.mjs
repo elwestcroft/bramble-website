@@ -33,11 +33,13 @@ const ICON = grab(/<link rel="icon"[^>]*>/, 'favicon link');
 const STYLE = grab(/<style>[\s\S]*?<\/style>/, '<style> block');
 
 // Convert the SPA's onclick-based nav into plain links that work without JS.
+// Allow other attributes (e.g. data-evt/data-loc on the nav CTA) to sit between
+// href and onclick; $1 preserves them, and the SPA-only onclick is stripped.
 const staticNav = (html) => html
-  .replace(/href="[^"]*"\s+onclick="goSection\('([^']+)'\);return false"/g, 'href="/#$1"')
-  .replace(/href="[^"]*"\s+onclick="go\('blog'\);return false"/g, 'href="/blog"')
-  .replace(/href="[^"]*"\s+onclick="go\('home'\);return false"/g, 'href="/"')
-  .replace(/href="[^"]*"\s+onclick="openArticle\('([^']+)'\);return false"/g, 'href="/blog/$1"');
+  .replace(/href="[^"]*"([^>]*?)\s+onclick="goSection\('([^']+)'\);return false"/g, 'href="/#$2"$1')
+  .replace(/href="[^"]*"([^>]*?)\s+onclick="go\('blog'\);return false"/g, 'href="/blog"$1')
+  .replace(/href="[^"]*"([^>]*?)\s+onclick="go\('home'\);return false"/g, 'href="/"$1')
+  .replace(/href="[^"]*"([^>]*?)\s+onclick="openArticle\('([^']+)'\);return false"/g, 'href="/blog/$2"$1');
 
 const HEADER = staticNav(grab(/<header>[\s\S]*?<\/header>/, '<header>'));
 const FOOTER = staticNav(grab(/<footer>[\s\S]*?<\/footer>/, '<footer>'));
@@ -147,6 +149,7 @@ ${STYLE}
 ${parts.jsonld.map((j) => `<script type="application/ld+json">${ld(j)}</script>`).join('\n')}
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 ${HEADER}`;
 
 const FOOT = `${FOOTER}
@@ -206,7 +209,7 @@ for (const a of withBody) {
       ]),
     ],
   }) + `
-<main>
+<main id="main">
   <div class="article">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep" aria-hidden="true">/</span> <a href="/blog">Blog</a> <span class="sep" aria-hidden="true">/</span> <span aria-current="page">${escHtml(a.title)}</span></nav>
     <div class="tag">${escHtml(a.tag)}</div>
@@ -223,8 +226,8 @@ for (const a of withBody) {
 
 // ---- blog index ----
 const card = (a) => a.body
-  ? `<a class="post-card" href="/blog/${a.slug}"><div class="tag">${escHtml(a.tag)}</div><h3>${escHtml(a.title)}</h3><p>${escHtml(a.excerpt)}</p><div class="more">Read the article →</div></a>`
-  : `<div class="post-card stub"><div class="tag">${escHtml(a.tag)}</div><h3>${escHtml(a.title)}</h3><p>${escHtml(a.excerpt)}</p><div class="more">Coming soon</div></div>`;
+  ? `<a class="post-card" href="/blog/${a.slug}"><div class="tag">${escHtml(a.tag)}</div><h2>${escHtml(a.title)}</h2><p>${escHtml(a.excerpt)}</p><div class="more">Read the article →</div></a>`
+  : `<div class="post-card stub"><div class="tag">${escHtml(a.tag)}</div><h2>${escHtml(a.title)}</h2><p>${escHtml(a.excerpt)}</p><div class="more">Coming soon</div></div>`;
 
 const blogIndex = head({
   title: 'The Bramble Blog | Field Notes for Writers',
@@ -233,11 +236,11 @@ const blogIndex = head({
   ogType: 'website',
   jsonld: [crumbLd([{ name: 'Home', url: `${SITE}/` }, { name: 'Blog', url: `${SITE}/blog` }])],
 }) + `
-<main>
+<main id="main">
   <div class="wrap blog-hero">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep" aria-hidden="true">/</span> <span aria-current="page">Blog</span></nav>
     <div class="eyebrow">The Bramble Blog</div>
-    <h2>Field notes for writers with too many characters.</h2>
+    <h1>Field notes for writers with too many characters.</h1>
     <p class="lede">Craft guides, honest comparisons, and systems for stories with moving parts.</p>
   </div>
   <div class="wrap"><div class="blog-grid">
@@ -246,6 +249,47 @@ const blogIndex = head({
 </main>
 ` + FOOT;
 writeFileSync(join(ROOT, 'blog', 'index.html'), blogIndex);
+
+// ---- privacy policy (generated from the shared shell so it never drifts from index.html) ----
+const privacyBody = `
+<main id="main">
+  <div class="article">
+    <a class="back" href="/">← Back to Bramble</a>
+    <div class="tag">Legal</div>
+    <h1>Privacy Policy</h1>
+    <p><strong>The short version.</strong> Bramble is a macOS app that runs on your computer. Your manuscripts, characters, notes, and everything else you create live as plain files on your Mac, not on our servers. We can't read your book. We don't want to. We don't train anything on it.</p>
+    <h2>What Bramble stores, and where</h2>
+    <p>Your projects are non-proprietary files on your disk. They stay there. Bramble does not upload your writing to us, and there is no Bramble cloud your manuscript is copied to. If you choose to keep your library in iCloud, Dropbox, or Google Drive, that is your storage provider under their terms, not ours.</p>
+    <h2>What we do collect</h2>
+    <p>Only what's needed to sell and license the app. When you buy Bramble or start a trial, our payment provider handles the transaction and we receive your email address and license status so we can support you and keep your license valid.</p>
+    <ol>
+      <li><strong>Purchase and license data.</strong> Handled by Lemon Squeezy (or any successor payment provider) acting as merchant of record. They process your payment and billing details; we never see or store your full card information. We receive your email, order, and license key status.</li>
+      <li><strong>License validation.</strong> Bramble contacts the licensing service to confirm your license is active, with an offline grace period so you can keep writing without a connection. This exchanges your license key, not your writing.</li>
+      <li><strong>Update checks.</strong> Bramble checks for new versions so you get fixes and features.</li>
+      <li><strong>Optional support contact.</strong> If you email info@trybramble.app, we keep that correspondence to help you.</li>
+    </ol>
+    <h2>This website (analytics &amp; cookies)</h2>
+    <p>This marketing website uses Google Analytics to understand how visitors find and move through the pages, so we can improve them. This is separate from the Bramble app; the app itself still runs no analytics or advertising trackers, as described above.</p>
+    <p>We may also use this data with Google&rsquo;s advertising features &mdash; including remarketing to people who have visited the site &mdash; to measure and improve our advertising. Advertising cookies are set only with your consent, and are denied by default for visitors in the European Economic Area and the United Kingdom.</p>
+    <p>We use Google Consent Mode. If you visit from the European Economic Area or the United Kingdom, analytics and advertising storage are <strong>denied by default</strong> and no analytics cookies are set unless you choose <strong>Accept</strong> on the cookie banner. You can change your mind any time with the <strong>Cookie choices</strong> link in the footer. Elsewhere, analytics runs by default and you can decline with the same control. Your choice is remembered on your device.</p>
+    <h2>What we don't do</h2>
+    <p>We don't sell your data. We don't use your writing to train AI. We don't run advertising trackers inside the app. There is no generative AI in your manuscript, by design.</p>
+    <h2>Your choices</h2>
+    <p>You can request a copy of the limited data we hold (your email, order, and license status), ask us to delete it, or deactivate a license from your device. Because your writing lives on your Mac, deleting your account with us does not touch your manuscripts; those are yours to keep or remove.</p>
+    <h2>Contact</h2>
+    <p>Questions about privacy? Email <strong>info@trybramble.app</strong>. The full, current policy is published at https://trybramble.app/privacy.</p>
+    <div class="cta-block"><strong style="font-family:var(--display);font-size:19px">Your words never leave your Mac unless you send them.</strong><div style="margin-top:16px"><a class="btn" href="/#pricing" data-evt="trial_cta_click" data-loc="privacy">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div></div>
+  </div>
+</main>
+`;
+const privacyPage = head({
+  title: 'Privacy Policy | Bramble',
+  desc: "Bramble's privacy policy. Your manuscripts stay on your Mac. We don't read your book or train anything on it.",
+  url: `${SITE}/privacy`,
+  ogType: 'website',
+  jsonld: [],
+}) + privacyBody + FOOT;
+writeFileSync(join(ROOT, 'privacy.html'), privacyPage);
 
 // ---- sitemap.xml + robots.txt ----
 const newest = withBody.map((a) => a.updated || a.date).filter(Boolean).sort().pop() || '';
