@@ -17,10 +17,27 @@
   // Key-event tracking: any element with data-evt fires a GA4 event on click.
   document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-evt]');if(t&&typeof gtag==='function'){gtag('event',t.getAttribute('data-evt'),{cta_location:t.getAttribute('data-loc')||'unknown'});}},true);
 </script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XL1M02XG4B"></script>
 <script>
   gtag('js', new Date());
   gtag('config', 'G-XL1M02XG4B');
+  // Load the gtag.js library lazily — on the first real interaction, or when the
+  // visitor leaves the page — so its third-party cost stays off the initial render
+  // path. Consent defaults above are already set (Consent Mode's ordering rule),
+  // and every gtag() call queues in dataLayer and flushes the instant the library
+  // loads. GA stays fully functional; it just isn't on the cold-load critical path.
+  (function(){
+    var loaded=false, evts=['pointerdown','keydown','touchstart','scroll','mousemove'];
+    function loadGA(){
+      if(loaded)return; loaded=true;
+      var s=document.createElement('script');
+      s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id=G-XL1M02XG4B';
+      document.head.appendChild(s);
+      evts.forEach(function(e){window.removeEventListener(e,loadGA);});
+    }
+    evts.forEach(function(e){window.addEventListener(e,loadGA,{passive:true,once:true});});
+    // Catch no-interaction visits: load when the tab is hidden / the visitor leaves.
+    document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')loadGA();});
+  })();
 </script>
 <!-- consent+analytics:end -->
 <title>The Bramble Blog | Field Notes for Writers</title>
