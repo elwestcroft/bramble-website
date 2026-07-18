@@ -214,7 +214,7 @@ for (const a of withBody) {
     ${a.date ? `<p class="pubdate">${a.byline ? 'By ' + escHtml(a.byline) + ' · ' : ''}<time datetime="${a.date}">${fmtDate(a.date)}</time>${a.updated && a.updated !== a.date ? ' · Updated ' + fmtDate(a.updated) : ''}</p>` : ''}
     ${mdToHtml(a.body)}
     <div class="related"><h2>Related reading</h2><ul>${related.map((r) => `<li><a href="/blog/${r.slug}">${escHtml(r.title)}</a></li>`).join('')}</ul></div>
-    <div class="cta-block">${cta ? `<strong style="font-family:var(--display);font-size:19px">${escHtml(cta)}</strong>` : ''}<div style="margin-top:${cta ? '16px' : '0'}"><a class="btn" href="/#pricing">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div></div>
+    <div class="cta-block">${cta ? `<strong style="font-family:var(--display);font-size:19px">${escHtml(cta)}</strong>` : ''}<div style="margin-top:${cta ? '16px' : '0'}"><a class="btn" href="/#pricing" data-evt="trial_cta_click" data-loc="article">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div></div>
   </div>
 </main>
 ` + FOOT;

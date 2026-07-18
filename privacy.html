@@ -14,6 +14,8 @@
   gtag('set','url_passthrough',true);
   // Re-apply a returning visitor's saved choice before tags evaluate.
   try{var _c=localStorage.getItem('bramble-consent');if(_c==='granted'||_c==='denied'){gtag('consent','update',{'ad_storage':_c,'ad_user_data':_c,'ad_personalization':_c,'analytics_storage':_c});}}catch(e){}
+  // Key-event tracking: any element with data-evt fires a GA4 event on click.
+  document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-evt]');if(t&&typeof gtag==='function'){gtag('event',t.getAttribute('data-evt'),{cta_location:t.getAttribute('data-loc')||'unknown'});}},true);
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XL1M02XG4B"></script>
 <script>
@@ -371,16 +373,15 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
       <li><strong>Optional support contact.</strong> If you email info@trybramble.app, we keep that correspondence to help you.</li>
     </ol>
     <h2>This website (analytics &amp; cookies)</h2>
-    <p>This marketing website uses Google Analytics (measurement ID G-XL1M02XG4B) to understand how visitors find and move through the pages, so we can improve them. This is separate from the Bramble app; the app itself still runs no analytics or advertising trackers, as described above.</p>
+    <p>This marketing website uses Google Analytics to understand how visitors find and move through the pages, so we can improve them. This is separate from the Bramble app; the app itself still runs no analytics or advertising trackers, as described above.</p>
     <p>We use Google Consent Mode. If you visit from the European Economic Area or the United Kingdom, analytics and advertising storage are <strong>denied by default</strong> and no analytics cookies are set unless you choose <strong>Accept</strong> on the cookie banner. You can change your mind any time with the <strong>Cookie choices</strong> link in the footer. Elsewhere, analytics runs by default and you can decline with the same control. Your choice is remembered on your device.</p>
-    <p>Google Analytics may set cookies and process usage data (such as pages viewed, approximate location, device and browser) as our processor. We have enabled IP redaction of ad signals; we do not use this data for advertising, and we don't sell it. See <strong>Google's Privacy Policy</strong> for how Google handles it.</p>
     <h2>What we don't do</h2>
     <p>We don't sell your data. We don't use your writing to train AI. We don't run advertising trackers inside the app. There is no generative AI in your manuscript, by design.</p>
     <h2>Your choices</h2>
     <p>You can request a copy of the limited data we hold (your email, order, and license status), ask us to delete it, or deactivate a license from your device. Because your writing lives on your Mac, deleting your account with us does not touch your manuscripts; those are yours to keep or remove.</p>
     <h2>Contact</h2>
     <p>Questions about privacy? Email <strong>info@trybramble.app</strong>. The full, current policy is published at https://trybramble.app/privacy.</p>
-    <div class="cta-block"><strong style="font-family:var(--display);font-size:19px">Your words never leave your Mac unless you send them.</strong><div style="margin-top:16px"><a class="btn" href="/#pricing">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div></div>
+    <div class="cta-block"><strong style="font-family:var(--display);font-size:19px">Your words never leave your Mac unless you send them.</strong><div style="margin-top:16px"><a class="btn" href="/#pricing" data-evt="trial_cta_click" data-loc="privacy">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div></div>
   </div>
 </main>
 <footer>

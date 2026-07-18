@@ -14,6 +14,8 @@
   gtag('set','url_passthrough',true);
   // Re-apply a returning visitor's saved choice before tags evaluate.
   try{var _c=localStorage.getItem('bramble-consent');if(_c==='granted'||_c==='denied'){gtag('consent','update',{'ad_storage':_c,'ad_user_data':_c,'ad_personalization':_c,'analytics_storage':_c});}}catch(e){}
+  // Key-event tracking: any element with data-evt fires a GA4 event on click.
+  document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-evt]');if(t&&typeof gtag==='function'){gtag('event',t.getAttribute('data-evt'),{cta_location:t.getAttribute('data-loc')||'unknown'});}},true);
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XL1M02XG4B"></script>
 <script>
@@ -349,7 +351,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
       <a href="/#pricing">Pricing</a>
       <a href="/blog">Blog</a>
       <a href="/#faq">Support</a>
-      <a class="btn" href="/#pricing">Try Bramble</a>
+      <a class="btn" href="#pricing" data-evt="trial_cta_click" data-loc="nav" onclick="goSection('pricing');return false">Try Bramble</a>
     </div>
   </nav>
 </header>

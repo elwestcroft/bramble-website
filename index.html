@@ -15,6 +15,8 @@
   gtag('set','url_passthrough',true);
   // Re-apply a returning visitor's saved choice before tags evaluate.
   try{var _c=localStorage.getItem('bramble-consent');if(_c==='granted'||_c==='denied'){gtag('consent','update',{'ad_storage':_c,'ad_user_data':_c,'ad_personalization':_c,'analytics_storage':_c});}}catch(e){}
+  // Key-event tracking: any element with data-evt fires a GA4 event on click.
+  document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-evt]');if(t&&typeof gtag==='function'){gtag('event',t.getAttribute('data-evt'),{cta_location:t.getAttribute('data-loc')||'unknown'});}},true);
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XL1M02XG4B"></script>
 <script>
@@ -378,7 +380,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
       <a href="#pricing" onclick="goSection('pricing');return false">Pricing</a>
       <a href="/blog" onclick="go('blog');return false">Blog</a>
       <a href="#faq" onclick="goSection('faq');return false">Support</a>
-      <a class="btn" href="#pricing" onclick="goSection('pricing');return false">Try Bramble</a>
+      <a class="btn" href="#pricing" data-evt="trial_cta_click" data-loc="nav" onclick="goSection('pricing');return false">Try Bramble</a>
     </div>
   </nav>
 </header>
@@ -392,7 +394,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
     <h1>Every character, every plot thread, every detail. <em>One place.</em></h1>
     <p class="lede">Bramble is the writing app for novelists whose stories outgrew their tools. Fantasy epics, LitRPG sagas, big casts: organized so you can stay in the story instead of struggling to manage it.</p>
     <div class="cta-row">
-      <a class="btn btn-big" href="#pricing" onclick="goSection('pricing');return false">Try Bramble Free</a>
+      <a class="btn btn-big" href="#pricing" data-evt="trial_cta_click" data-loc="hero" onclick="goSection('pricing');return false">Try Bramble Free</a>
     </div>
     <p class="microtrust">Free for 14 days. No credit card. Made for macOS.</p>
     <div class="mock-stage">
@@ -560,7 +562,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
         <div class="price">14 days</div>
         <div class="per">A direct download for macOS. No credit card. Nothing to cancel. It just ends, politely.</div>
         <ul><li>Every feature, no locked doors</li><li>Import your manuscript from Word</li><li>Your work is yours, trial or not</li></ul>
-        <a class="btn" href="#">Download the free trial</a>
+        <a class="btn" href="#" data-evt="trial_cta_click" data-loc="pricing">Download the free trial</a>
       </div>
       <div class="plan founder reveal">
         <div class="badge">Founder Edition</div>
@@ -568,7 +570,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
         <div class="price">$39.99<span style="font-size:16px;color:var(--text-soft)"> CAD</span></div>
         <div class="per">One-time, lifetime access. macOS. Founder pricing is for the launch window only, and we mean it.</div>
         <ul><li>Everything in the trial, unlocked forever</li><li>A lifetime license, not a subscription</li><li>First access to new features; you fund the roadmap</li></ul>
-        <a class="btn" href="#">Claim the Founder Edition</a>
+        <a class="btn" href="#" data-evt="founder_cta_click" data-loc="pricing">Claim the Founder Edition</a>
       </div>
     </div>
     <p class="microtrust reveal">Most writers start with the trial, then make it permanent.</p>
@@ -597,7 +599,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
     <img class="icon reveal" src="/favicon.png" alt="" width="160" height="160">
     <h2 class="reveal">Your story is waiting. Stop managing it and start writing it.</h2>
     <p class="lede reveal">Join the writers who stopped losing fights with their own notes.</p>
-    <a class="btn btn-big reveal" href="#pricing" onclick="goSection('pricing');return false">Try Bramble Free</a>
+    <a class="btn btn-big reveal" href="#pricing" data-evt="trial_cta_click" data-loc="final" onclick="goSection('pricing');return false">Try Bramble Free</a>
     <p class="microtrust reveal">Free for 14 days. No credit card required.</p>
   </div>
 </section>
@@ -626,7 +628,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
     <p>You can request a copy of the limited data we hold (your email, order, and license status), ask us to delete it, or deactivate a license from your device. Because your writing lives on your Mac, deleting your account with us does not touch your manuscripts; those are yours to keep or remove.</p>
     <h2>Contact</h2>
     <p>Questions about privacy? Email <strong>info@trybramble.app</strong>. The full, current policy is published at https://trybramble.app/privacy.</p>
-    <div class="cta-block"><strong style="font-family:var(--display);font-size:19px">Your words never leave your Mac unless you send them.</strong><div style="margin-top:16px"><a class="btn" href="#pricing" onclick="goSection('pricing');return false">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div></div>
+    <div class="cta-block"><strong style="font-family:var(--display);font-size:19px">Your words never leave your Mac unless you send them.</strong><div style="margin-top:16px"><a class="btn" href="#pricing" data-evt="trial_cta_click" data-loc="privacy" onclick="goSection('pricing');return false">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div></div>
   </div>
 </div>
 <div id="view-blog" class="hidden">
@@ -844,7 +846,7 @@ function renderArticle(slug){
   const a=ARTICLES.find(x=>x.slug===slug);
   if(!a||!a.body) return null;
   document.getElementById('article-body').innerHTML='<div class="tag">'+a.tag+'</div><h1>'+a.title+'</h1>'+mdToHtml(a.body);
-  document.getElementById('article-cta').innerHTML=(a.cta?'<strong style="font-family:var(--display);font-size:19px">'+a.cta+'</strong>':'')+'<div style="margin-top:'+(a.cta?'16px':'0')+'"><a class="btn" href="#pricing" onclick="goSection(\'pricing\');return false">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div>';
+  document.getElementById('article-cta').innerHTML=(a.cta?'<strong style="font-family:var(--display);font-size:19px">'+a.cta+'</strong>':'')+'<div style="margin-top:'+(a.cta?'16px':'0')+'"><a class="btn" href="#pricing" data-evt="trial_cta_click" data-loc="article" onclick="goSection(\'pricing\');return false">Try Bramble Free</a><span class="microtrust" style="margin-left:14px;display:inline-block">14 days. No credit card.</span></div>';
   setBreadcrumb(a);
   return a;
 }
