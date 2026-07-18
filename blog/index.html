@@ -408,6 +408,9 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
 (function(){
   var KEY='bramble-consent', el=document.getElementById('consent'); if(!el) return;
   function likelyEEA(){
+    // Prefer the edge geo cookie set by middleware.js (IP-accurate). Falls back to
+    // the timezone heuristic when it's absent (e.g. local dev, or if edge fails).
+    try{ var m=document.cookie.match(/(?:^|;\s*)bramble-geo=(eea|row)/); if(m) return m[1]==='eea'; }catch(e){}
     try{ var tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';
       return /^Europe\//.test(tz) || ['Atlantic/Reykjavik','Atlantic/Azores','Atlantic/Madeira','Atlantic/Canary'].indexOf(tz)>=0;
     }catch(e){ return true; }
