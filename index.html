@@ -139,6 +139,9 @@ a.btn{color:var(--ink)}
 .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--hairline)}
 a.btn-ghost{color:var(--text)}
 .btn-ghost:hover{background:var(--card);color:var(--text);box-shadow:none}
+/* Pre-launch waiting state: a calm, clearly-inactive CTA while checkout (Lemon Squeezy) is pending. */
+.btn-soon{background:transparent;color:var(--text-soft);border:1px solid var(--hairline);cursor:default}
+.btn-soon:hover{background:transparent;color:var(--text-soft);transform:none;box-shadow:none}
 .btn-big{padding:15px 30px;font-size:16px}
 .burger{display:none;margin-left:auto;background:none;border:1px solid var(--hairline);border-radius:8px;padding:9px 10px;cursor:pointer;line-height:0}
 .burger svg{width:20px;height:16px;stroke:var(--text);stroke-width:2;stroke-linecap:round}
@@ -597,7 +600,8 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
         <div class="price">14 days</div>
         <div class="per">A direct download for macOS. No credit card. Nothing to cancel. It just ends, politely.</div>
         <ul><li>Every feature, no locked doors</li><li>Import your manuscript from Word</li><li>Your work is yours, trial or not</li></ul>
-        <a class="btn" href="#" data-evt="trial_cta_click" data-loc="pricing">Download the free trial</a>
+        <!-- restore active CTA (href + data-evt="trial_cta_click" data-loc="pricing") when the Lemon Squeezy download URL is ready -->
+        <button type="button" class="btn btn-soon" disabled aria-label="Free trial — coming soon">Coming soon</button>
       </div>
       <div class="plan founder reveal">
         <div class="badge">Founder Edition</div>
@@ -605,7 +609,8 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
         <div class="price">$39.99<span style="font-size:16px;color:var(--text-soft)"> CAD</span></div>
         <div class="per">One-time, lifetime access. macOS. Founder pricing is for the launch window only, and we mean it.</div>
         <ul><li>Everything in the trial, unlocked forever</li><li>A lifetime license, not a subscription</li><li>First access to new features; you fund the roadmap</li></ul>
-        <a class="btn" href="#" data-evt="founder_cta_click" data-loc="pricing">Claim the Founder Edition</a>
+        <!-- restore active CTA (href + data-evt="founder_cta_click" data-loc="pricing") when the Lemon Squeezy checkout URL is ready -->
+        <button type="button" class="btn btn-soon" disabled aria-label="Founder Edition — coming soon">Coming soon</button>
       </div>
     </div>
     <p class="microtrust reveal">Most writers start with the trial, then make it permanent.</p>
