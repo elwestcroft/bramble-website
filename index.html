@@ -112,6 +112,7 @@ button{font-family:var(--body)}
   .vine path.cane{stroke-dashoffset:0!important;transition:none}
   .vine .sprout{opacity:.4;transform:scale(1);transition:none}
   .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .develop{filter:none!important;scale:1!important;transition:none!important}
   #drift{display:none}
   .mock-stage .mock{transform:none!important}
 }
@@ -215,6 +216,15 @@ h2{font-size:clamp(28px,4vw,42px);max-width:22ch;margin-bottom:16px}
 .fblock>p{color:var(--text-soft);max-width:62ch}
 .fblock img{display:block;width:100%;height:auto;margin-top:28px;border-radius:12px;border:1px solid rgba(255,255,255,.08);box-shadow:0 18px 44px rgba(8,18,13,.45)}
 @media(max-width:900px){.frow{grid-template-columns:1fr;gap:26px}.frow:nth-child(even) .fviz{order:0}}
+
+/* ---------- "develop": real app screenshots resolve from soft focus into sharp as their block reveals ---------- */
+/* Layered on the existing JS reveal (.reveal -> .in via onScroll): the block fades in and the screenshot
+   simultaneously pulls into focus, over a longer curve so it keeps resolving after the block lands.
+   .js-gated (no JS = sharp), reduced-motion clears it, and .develop only animates filter/scale (never
+   opacity), so it can never hide content on its own — the image is always in the DOM and visible. */
+.js .reveal .develop{ filter:blur(6px) brightness(.85) saturate(.82); scale:1.04; transition:filter 1.15s cubic-bezier(.2,.75,.25,1), scale 1.15s cubic-bezier(.2,.75,.25,1); }
+.js .reveal.in .develop{ filter:none; scale:1; }
+@media(max-width:640px){ .js .reveal .develop{ filter:brightness(.85) saturate(.82); } } /* skip the blur repaint on small screens */
 
 /* ---------- the Board (tendril linking) ---------- */
 
@@ -446,7 +456,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
       </div>
       <div class="chaos-arrow" aria-hidden="true">→</div>
       <div class="chaos-shot">
-        <img src="/img/character-card.webp" srcset="/img/character-card-560.webp 560w, /img/character-card.webp 880w" sizes="(max-width: 900px) calc(100vw - 44px), 430px" alt="A character card in Bramble: Mara Voss, with her role, age tracked per book, fears, and what she carries" width="880" height="1019" loading="lazy">
+        <img class="develop" src="/img/character-card.webp" srcset="/img/character-card-560.webp 560w, /img/character-card.webp 880w" sizes="(max-width: 900px) calc(100vw - 44px), 430px" alt="A character card in Bramble: Mara Voss, with her role, age tracked per book, fears, and what she carries" width="880" height="1019" loading="lazy">
       </div>
     </div>
   </div>
@@ -485,12 +495,12 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
     <div class="fblock reveal">
       <h3>A Series Bible spans every book</h3>
       <p>Your series live on shelves with a bible that travels through each book. Pull characters into future instalments, easily search for answers. Stay ten steps ahead of those pesky readers looking for missteps.</p>
-      <img src="/img/shelf.webp" srcset="/img/shelf-1300.webp 1300w, /img/shelf.webp 2068w" sizes="(max-width: 1150px) calc(100vw - 44px), 1056px" alt="A series shelf in Bramble: The Hollow Crown, three books with a shared series bible and room for the next" width="2068" height="424" loading="lazy">
+      <img class="develop" src="/img/shelf.webp" srcset="/img/shelf-1300.webp 1300w, /img/shelf.webp 2068w" sizes="(max-width: 1150px) calc(100vw - 44px), 1056px" alt="A series shelf in Bramble: The Hollow Crown, three books with a shared series bible and room for the next" width="2068" height="424" loading="lazy">
     </div>
     <div class="fblock reveal">
       <h3>Every arc, mapped beat by beat</h3>
       <p>The Story Map gives every plotline its own lane, from hook to climax. See where arcs collide, where a thread goes quiet, and what still needs paying off. The whole book from ten thousand feet.</p>
-      <img src="/img/story-map.webp" alt="Bramble's Story Map: main plot, character arcs, and subplots each in their own lane across story beats from hook to climax" width="2000" height="705" loading="lazy">
+      <img class="develop" src="/img/story-map.webp" alt="Bramble's Story Map: main plot, character arcs, and subplots each in their own lane across story beats from hook to climax" width="2000" height="705" loading="lazy">
     </div>
     <div class="frow reveal">
       <div>
@@ -498,7 +508,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
         <p>The Board is your bulletin-board and mind map: pin characters, scenes, and ideas as cards. Draw tendrils from one to another to string connections. Brainstorm a heist, map out a love triangle, untangle the conspiracy, all without leaving the app.</p>
       </div>
       <div class="fviz">
-        <img src="/img/board.webp" alt="The Board in Bramble: two pinned idea cards connected by a hand-drawn tendril" width="1096" height="676" loading="lazy">
+        <img class="develop" src="/img/board.webp" alt="The Board in Bramble: two pinned idea cards connected by a hand-drawn tendril" width="1096" height="676" loading="lazy">
       </div>
     </div>
     <div class="frow reveal">
@@ -507,7 +517,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
         <p>Stat Boxes are built into the database, inserted into the page and linked to your characters in the Series Bible. No more spreadsheets!</p>
       </div>
       <div class="fviz">
-        <img src="/img/statbox.webp" alt="A LitRPG stat box in Bramble: level, HP, MP, gold and a new skill, linked to the character record" width="882" height="306" loading="lazy">
+        <img class="develop" src="/img/statbox.webp" alt="A LitRPG stat box in Bramble: level, HP, MP, gold and a new skill, linked to the character record" width="882" height="306" loading="lazy">
       </div>
     </div>
   </div>

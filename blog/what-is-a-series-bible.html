@@ -111,6 +111,7 @@ button{font-family:var(--body)}
   .vine path.cane{stroke-dashoffset:0!important;transition:none}
   .vine .sprout{opacity:.4;transform:scale(1);transition:none}
   .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .develop{filter:none!important;scale:1!important;transition:none!important}
   #drift{display:none}
   .mock-stage .mock{transform:none!important}
 }
@@ -214,6 +215,15 @@ h2{font-size:clamp(28px,4vw,42px);max-width:22ch;margin-bottom:16px}
 .fblock>p{color:var(--text-soft);max-width:62ch}
 .fblock img{display:block;width:100%;height:auto;margin-top:28px;border-radius:12px;border:1px solid rgba(255,255,255,.08);box-shadow:0 18px 44px rgba(8,18,13,.45)}
 @media(max-width:900px){.frow{grid-template-columns:1fr;gap:26px}.frow:nth-child(even) .fviz{order:0}}
+
+/* ---------- "develop": real app screenshots resolve from soft focus into sharp as their block reveals ---------- */
+/* Layered on the existing JS reveal (.reveal -> .in via onScroll): the block fades in and the screenshot
+   simultaneously pulls into focus, over a longer curve so it keeps resolving after the block lands.
+   .js-gated (no JS = sharp), reduced-motion clears it, and .develop only animates filter/scale (never
+   opacity), so it can never hide content on its own — the image is always in the DOM and visible. */
+.js .reveal .develop{ filter:blur(6px) brightness(.85) saturate(.82); scale:1.04; transition:filter 1.15s cubic-bezier(.2,.75,.25,1), scale 1.15s cubic-bezier(.2,.75,.25,1); }
+.js .reveal.in .develop{ filter:none; scale:1; }
+@media(max-width:640px){ .js .reveal .develop{ filter:brightness(.85) saturate(.82); } } /* skip the blur repaint on small screens */
 
 /* ---------- the Board (tendril linking) ---------- */
 
