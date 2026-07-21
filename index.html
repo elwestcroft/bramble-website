@@ -463,7 +463,7 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
       </div>
       <div class="chaos-arrow" aria-hidden="true">→</div>
       <div class="chaos-shot">
-        <img class="develop" src="/img/character-card.webp" srcset="/img/character-card-560.webp 560w, /img/character-card.webp 880w" sizes="(max-width: 900px) calc(100vw - 44px), 430px" alt="A character card in Bramble: Mara Voss, with her role, age tracked per book, fears, and what she carries" width="880" height="1019" loading="lazy">
+        <img class="develop" src="/img/character-card.webp" srcset="/img/character-card-560.webp 560w, /img/character-card-720.webp 720w, /img/character-card.webp 880w" sizes="(max-width: 900px) calc(100vw - 44px), 430px" alt="A character card in Bramble: Mara Voss, with her role, age tracked per book, fears, and what she carries" width="880" height="1019" loading="lazy">
       </div>
     </div>
   </div>
@@ -721,12 +721,14 @@ footer .ig svg{width:18px;height:18px;vertical-align:-4px}
 </footer>
 
 <script>
-function showView(view){
+function showView(view, skipScroll){
   ['home','blog','article','privacy'].forEach(v=>document.getElementById('view-'+v).classList.toggle('hidden', v!==view));
   document.querySelector('.nav-links').classList.remove('open');
   var burger=document.querySelector('.burger'); if(burger) burger.setAttribute('aria-expanded','false');
   if(view!=='article'){ const ld=document.getElementById('breadcrumb-jsonld'); if(ld) ld.remove(); }
-  window.scrollTo({top:0, behavior:'auto'});
+  // skipScroll on the initial load: we're already at the top, and scrollTo here forces a
+  // synchronous layout right after renderBlog() mutates the DOM (a 67ms forced reflow).
+  if(!skipScroll) window.scrollTo({top:0, behavior:'auto'});
   requestAnimationFrame(onScroll);
 }
 let navState={view:'home'};
@@ -762,7 +764,7 @@ function initNav(){
   else if(h==='#privacy'){ s={view:'privacy'}; }
   navState=s;
   try{ history.replaceState(s,'',hashFor(s)); }catch(e){ history.replaceState(s,''); }
-  showView(s.view);
+  showView(s.view, true); // initial load: don't force a scroll/reflow
 }
 
 const caneL=document.getElementById('caneL'), caneR=document.getElementById('caneR');
